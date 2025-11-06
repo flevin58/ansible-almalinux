@@ -23,10 +23,13 @@
         state: present
         name:
           - bat
+          - clang-tools-extra
+          - clang
           - curl
           - fastfetch
           - fzf
           - gum
+          - just
           - nodejs
           - wget
 

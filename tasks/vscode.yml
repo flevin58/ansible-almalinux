@@ -36,6 +36,7 @@
     - sumneko.lua
     - tamasfe.even-better-toml
     - vadimcn.vscode-lldb
+    - xaver.clang-format
 
 - name: Copy VS Code settings
   ansible.builtin.copy:

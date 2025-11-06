@@ -21,3 +21,11 @@
     src: ../templates/zsh/zshrc
     dest: "{{ ansible_env.HOME }}/.zshrc"
     mode: 0644
+
+- name: Copy the zsh custom files directory
+  ansible.builtin.copy:
+    src: ../files/zsh/
+    dest: "{{ ansible_env.HOME }}/.config/zsh/"
+    mode: 0755
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
