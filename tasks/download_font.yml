@@ -1,0 +1,23 @@
+---
+- name: Define font vars
+  set_fact:
+    font_url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ font }}.tar.xz"
+    font_folder: "{{ ansible_env.HOME }}/.local/share/fonts/{{ font }}"
+
+- name: Check existing directory for {{ font }}
+  stat:
+    path: "{{ font_folder }}"
+  register: font_dir
+
+- name: Create directory for {{ font }}
+  ansible.builtin.file:
+    path: "{{ font_folder }}"
+    mode: 0775
+    state: directory
+  when: not font_dir.stat.exists
+
+- name: Download and extract {{ font }}
+  ansible.builtin.unarchive:
+    src: "{{ font_url }}"
+    dest: "{{ font_folder }}"
+    remote_src: true

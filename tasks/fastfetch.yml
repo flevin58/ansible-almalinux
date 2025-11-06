@@ -1,0 +1,17 @@
+- name: Install fastfetch
+  become: true
+  ansible.builtin.dnf:
+    name: fastfetch
+    state: latest
+
+- name: Create fastfetch config directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/fastfetch"
+    state: directory
+    mode: 0755
+
+- name: Configure fastfetch
+  ansible.builtin.copy:
+    src: ../files/fastfetch.jsonc
+    dest: "{{ ansible_env.HOME }}/.config/fastfetch/config.jsonc"
+    mode: 0644

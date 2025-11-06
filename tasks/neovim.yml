@@ -1,0 +1,14 @@
+---
+- name: Install neovim
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-arm64.tar.gz"
+    dest: /usr
+    extra_opts: [--strip-components=1]
+    remote_src: true
+ 
+- name: Copy configutation files for neovim
+  ansible.posix.synchronize:
+      src: ../files/nvim
+      dest: "{{ ansible_env.HOME }}/.config"
+      recursive: yes

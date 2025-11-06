@@ -1,0 +1,23 @@
+- name: Install zsh
+  become: true
+  ansible.builtin.dnf:
+    name: zsh
+    state: latest
+
+- name: Change default shell to zsh for the user
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/zsh
+
+- name: Deploy .zshenv configuration file
+  ansible.builtin.template:
+    src: ../templates/zsh/zshenv
+    dest: "{{ ansible_env.HOME }}/.zshenv"
+    mode: 0644
+
+- name: Deploy .zshrc configuration file
+  ansible.builtin.template:
+    src: ../templates/zsh/zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    mode: 0644

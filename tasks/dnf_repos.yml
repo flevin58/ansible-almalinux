@@ -1,0 +1,19 @@
+---
+- name: Install the 'Development tools' package group
+  become: true
+  ansible.builtin.dnf:
+    name: "@Development tools"
+    state: latest
+
+- name: Install the 'EPEL' repository
+  become: true
+  ansible.builtin.dnf:
+    name: epel-release
+    state: latest
+
+- name: Upgrade all packages
+  become: true
+  ansible.builtin.dnf:
+    update_cache: yes
+    name: "*"
+    state: latest

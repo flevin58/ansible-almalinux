@@ -1,0 +1,15 @@
+- name: Install oh-my-posh
+  ansible.builtin.shell:
+    cmd: curl -s https://ohmyposh.dev/install.sh | bash -s
+
+- name: Create directory for oh-my-posh configuration
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/oh-my-posh"
+    state: directory
+    mode: 0755
+ 
+- name: Deploy oh-my-posh configuration file
+  ansible.builtin.copy:
+    src: ../files/oh-my-posh.toml
+    dest: "{{ ansible_env.HOME }}/.config/oh-my-posh/config.toml"
+    mode: 0644

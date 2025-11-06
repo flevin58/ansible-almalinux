@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "window.zoomLevel": 1.52,
+    "editor.fontSize": 14,
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
+    "editor.formatOnSave": true,
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.integrated.tabs.location": "right",
+    "git.confirmSync": false,
+    "workbench.iconTheme": "catppuccin-mocha"
+}

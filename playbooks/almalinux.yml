@@ -1,0 +1,91 @@
+---
+- hosts: alma
+
+  tasks:
+    - name: debug current user
+      ansible.builtin.debug:
+        msg: "Home is {{ ansible_env.HOME }} and User is {{ ansible_env.USER }}"
+
+    - name: Allow passwordless sudo for {{ ansible_env.USER }}
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/{{ ansible_env.USER }}
+        create: yes
+        line: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: ALL"
+
+    - name: Install dnf repositories
+      ansible.builtin.include_tasks:
+        file: ../tasks/dnf_repos.yml
+
+    - name: Install core tools
+      become: true
+      ansible.builtin.dnf:
+        state: present
+        name:
+          - bat
+          - curl
+          - fastfetch
+          - fzf
+          - gum
+          - nodejs
+          - wget
+
+    - name: Install zsh and make it the default shell
+      ansible.builtin.include_tasks:
+        file: ../tasks/zsh.yml
+
+    - name: Install antidote plugin manager and plugins for zsh
+      ansible.builtin.include_tasks:
+        file: ../tasks/antidote.yml
+
+    - name: Create user's .local/bin directory and ensure it's in PATH
+      ansible.builtin.include_tasks:
+        file: ../tasks/local_bin.yml
+
+    - name: Install oh-my-posh
+      ansible.builtin.include_tasks:
+        file: ../tasks/oh-my-posh.yml
+
+    - name: Install fonts
+      ansible.builtin.include_tasks:
+        file: ../tasks/download_font.yml
+      loop:
+        - JetBrainsMono
+        - FiraCode
+      loop_control:
+        loop_var: font
+
+    - name: Update font cache
+      ansible.builtin.shell: fc-cache -f
+
+    - name: Configure bat
+      ansible.builtin.include_tasks:
+        file: ../tasks/bat_config.yml
+
+    - name: Configure ptyxis
+      ansible.builtin.include_tasks:
+        file: ../tasks/ptyxis.yml
+
+    - name: Install VS Code
+      ansible.builtin.include_tasks:
+        file: ../tasks/vscode.yml
+
+    - name: Install neovim
+      ansible.builtin.include_tasks:
+        file: ../tasks/neovim.yml
+
+    - name: Install golang
+      ansible.builtin.include_tasks:
+        file: ../tasks/golang.yml
+
+    - name: Install rust
+      ansible.builtin.include_tasks:
+        file: ../tasks/rust.yml
+
+    - name: Install VS Code
+      ansible.builtin.include_tasks:
+        file: ../tasks/vscode.yml
+
+    - name: Install and configure fastfetch
+      ansible.builtin.include_tasks:
+        file: ../tasks/fastfetch.yml

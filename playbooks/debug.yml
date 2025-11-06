@@ -1,0 +1,18 @@
+---
+- hosts: alma
+
+  tasks:
+    - name: debug current user
+      ansible.builtin.debug:
+        msg: "Home is {{ ansible_env.HOME }} and User is {{ ansible_env.USER }}"
+
+    - name: Allow passwordless sudo for {{ ansible_env.USER }}
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/{{ ansible_env.USER }}
+        create: yes
+        line: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: ALL"
+
+    - name: Install VS Code
+      ansible.builtin.include_tasks:
+        file: ../tasks/vscode.yml

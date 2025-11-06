@@ -1,0 +1,32 @@
+---
+- name: Install rust
+  ansible.builtin.shell:
+    cmd: curl -s --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+
+- name: Ensure {{ ansible_env.HOME}}/.cargo/bin is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    search_string: 'export PATH="$PATH:$HOME/.cargo/bin"'
+    insertbefore: "^# PATH ending point"
+    line: 'export PATH="$PATH:$HOME/.cargo/bin"'
+
+- name: Install cargo-expand
+  community.general.cargo:
+    name: cargo-expand
+    state: latest
+
+- name: Install cargo-generate
+  community.general.cargo:
+    name: cargo-generate
+    state: latest
+
+- name: Install cargo-modules
+  community.general.cargo:
+    name: cargo-modules
+    state: latest
+
+- name: Install eza
+  community.general.cargo:
+    name: eza
+    state: latest

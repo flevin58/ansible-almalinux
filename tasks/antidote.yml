@@ -1,0 +1,12 @@
+---
+- name: Install Antidote plugin manager for zsh
+  ansible.builtin.git:
+    repo: https://github.com/mattmc3/antidote.git
+    depth: 1
+    dest: "{{ ansible_env.HOME }}/.antidote"
+
+- name: Install Antidote plugins file
+  ansible.builtin.copy:
+    src: ../files/zsh_plugins.txt
+    dest: "{{ ansible_env.HOME }}/.zsh_plugins.txt"
+    mode: 0644

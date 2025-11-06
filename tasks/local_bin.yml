@@ -1,0 +1,13 @@
+---
+- name: Create {{ ansible_env.HOME }}/.local/bin directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    mode: 0775
+    state: directory
+
+- name: Ensure {{ ansible_env.HOME}}/.cargo/bin is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    search_string: 'export PATH="$PATH:$HOME/.local/bin"'
+    insertbefore: "^# PATH ending point"
+    line: 'export PATH="$PATH:$HOME/.local/bin"'

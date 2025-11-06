@@ -1,0 +1,45 @@
+- name: Add VS Code repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: vscode
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Install VS Code
+  become: true
+  ansible.builtin.dnf:
+    name: code
+    state: latest
+
+- name: Install VS Code extensions
+  ansible.builtin.command: "code --install-extension {{ item }}"
+  loop:
+    - catppuccin.catppuccin-vsc
+    - catppuccin.catppuccin-vsc-icons
+    - golang.go
+    - gruntfuggly.todo-tree
+    - ms-vscode.cpptools
+    - ms-vscode.cpptools-extension-pack
+    - ms-vscode.cpptools-themes
+    - ms-vscode.hexeditor
+    - ms-vscode-remote.remote-ssh
+    - ms-vscode-remote.remote-ssh-edit
+    - ms-vscode.remote-explorer
+    - nefrob.vscode-just-syntax
+    - redhat.vscode-yaml
+    - rust-lang.rust-analyzer
+    - shd101wyy.markdown-preview-enhanced
+    - slint.slint
+    - sumneko.lua
+    - tamasfe.even-better-toml
+    - vadimcn.vscode-lldb
+
+- name: Copy VS Code settings
+  ansible.builtin.copy:
+    force: yes
+    src: ../files/vscode_settings.json
+    dest: "{{ ansible_env.HOME }}/.config/Code/User/settings.json"
+    mode: 0644

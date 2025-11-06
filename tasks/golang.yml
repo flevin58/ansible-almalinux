@@ -1,0 +1,22 @@
+- name: Install golang
+  become: true
+  ansible.builtin.dnf:
+    name: golang
+    state: latest
+
+- name: Ensure "{{ ansible_env.HOME }}/go/bin is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    search_string: 'export PATH="$PATH:$HOME/go/bin"'
+    insertbefore: "^# PATH ending point"
+    line: 'export PATH="$PATH:$HOME/go/bin"'
+
+- name: Install gopls
+  ansible.builtin.shell:
+    cmd: /usr/bin/go install golang.org/x/tools/gopls@latest
+    creates: "{{ ansible_env.HOME }}/go/bin/gopls"
+
+- name: Install Development
+  ansible.builtin.shell:
+    cmd: /usr/bin/go install github.com/go-delve/delve/cmd/dlv@latest
+    creates: "{{ ansible_env.HOME }}/go/bin/delve"

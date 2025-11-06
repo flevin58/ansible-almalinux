@@ -1,0 +1,15 @@
+---
+- name: Create temp file for Ptyxis configuration
+  tempfile:
+    state: file
+    suffix: _ptyxis.ini
+  register: ptyxis_temp_file
+
+- name: Copy the Ptyxis configuration file to temp file
+  ansible.builtin.copy:
+    src: ../files/ptyxis.ini
+    dest: "{{ ptyxis_temp_file.path }}"
+
+- name: Configure Ptyxis terminal emulator
+  ansible.builtin.shell:
+    cmd: dconf load /org/gnome/Ptyxis/ < {{ ptyxis_temp_file.path }}
