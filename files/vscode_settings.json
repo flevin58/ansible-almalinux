@@ -12,5 +12,10 @@
     "terminal.integrated.lineHeight": 1.2,
     "terminal.integrated.tabs.location": "right",
     "git.confirmSync": false,
-    "workbench.iconTheme": "catppuccin-mocha"
+    "workbench.iconTheme": "catppuccin-mocha",
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "clang-format.fallbackStyle": "Google"
 }
