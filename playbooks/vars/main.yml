@@ -1,0 +1,12 @@
+github:
+  full_name: "Fernando Levin"
+  email: "flevin58@gmail.com"
+
+languages:
+  install_go: true
+  install_rust: true
+  install_zig: false
+
+nerd_fonts:
+  - FiraCode
+  - JetBrainsMono

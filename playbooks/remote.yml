@@ -1,6 +1,7 @@
 ---
-- hosts: localhost
-  connection: local
+- hosts: remote
+  vars_files:
+    - vars/main.yml
 
   tasks:
     - name: Install everything!

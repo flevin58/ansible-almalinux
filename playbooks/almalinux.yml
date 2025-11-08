@@ -1,7 +1,0 @@
----
-- hosts: alma
-
-  tasks:
-    - name: Install everything!
-      ansible.builtin.include_tasks:
-        file: ../tasks/everything.yml

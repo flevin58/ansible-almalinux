@@ -6,4 +6,3 @@ alias ci="cargo install --path ."
 alias crb="cargo run -q --bin"
 alias ctb="cargo test --bin"
 alias gorust="cd $PROJECTS/Rust"
-

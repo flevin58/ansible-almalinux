@@ -1,12 +1,6 @@
-[clients]
-alma
-localhost
+[local]
 M4-Nando.local
-MacMini.local
 
-[MacOSX]
-M4-Nando.local
+[remote]
 MacMini.local
-
-[AlmaLinux]
 alma

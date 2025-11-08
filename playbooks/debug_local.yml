@@ -1,8 +1,10 @@
 ---
 - hosts: localhost
   connection: local
+  vars_files:
+    - vars/main.yml
 
   tasks:
-    - name: Debug!
+    - name: Debug task
       ansible.builtin.include_tasks:
-        file: ../tasks/zig.yml
+        file: ../tasks/debug.yml

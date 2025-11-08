@@ -1,0 +1,20 @@
+- name: Debug!
+  ansible.builtin.debug:
+    msg:
+      - "github: {{ github }}"
+      - "languages: {{ languages }}"
+
+- name: Fonts
+  ansible.builtin.debug:
+    msg: "font -> {{ item }}"
+  with_items: "{{ nerd_fonts }}"
+
+- name: Go install
+  ansible.builtin.debug:
+    msg: "We are installing Go!"
+  when: languages.install_go
+
+- name: Zig install
+  ansible.builtin.debug:
+    msg: "We are installing Zig!"
+  when: languages.install_zig

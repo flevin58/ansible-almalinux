@@ -1,0 +1,15 @@
+---
+- name: Include github vars
+  ansible.builtin.include_vars:
+    file: github.yml
+    name: github
+
+- name: Set global gitignore file
+  ansible.builtin.copy:
+    src: ../files/git/gitignore_global
+    dest: "{{ ansible_env.HOME }}/.gitignore_global"
+
+- name: Set global config file
+  ansible.builtin.template:
+    src: ../templates/gitconfig.j2
+    dest: "{{ ansible_env.HOME }}/.gitconfig"

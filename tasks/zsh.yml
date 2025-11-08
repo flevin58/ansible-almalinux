@@ -1,3 +1,4 @@
+---
 - name: Install zsh for AlmaLinux
   become: true
   ansible.builtin.dnf:

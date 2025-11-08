@@ -7,9 +7,7 @@
     path: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
     state: directory
     mode: 0755
-  with_items:
-    - JetBrainsMono
-    - FiraCode
+  with_items: "{{ nerd_fonts }}"
   when: ansible_distribution == "AlmaLinux"
 
 - name: Download and extract fonts for AlmaLinux
@@ -18,9 +16,7 @@
     dest: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
     mode: 0775
     remote_src: yes
-  with_items:
-    - JetBrainsMono
-    - FiraCode
+  with_items: "{{ nerd_fonts }}"
   when: ansible_distribution == "AlmaLinux"
 
 - name: Update font cache for AlmaLinux
@@ -35,9 +31,7 @@
     path: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
     state: directory
     mode: 0755
-  with_items:
-    - JetBrainsMono
-    - FiraCode
+  with_items: "{{ nerd_fonts }}"
   when: ansible_distribution == "MacOSX"
 
 - name: Download and extract fonts for MacOSX
@@ -46,7 +40,5 @@
     dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
     mode: 0775
     remote_src: yes
-  with_items:
-    - JetBrainsMono
-    - FiraCode
+  with_items: "{{ nerd_fonts }}"
   when: ansible_distribution == "MacOSX"
