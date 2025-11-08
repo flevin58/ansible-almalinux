@@ -22,10 +22,6 @@
   ansible.builtin.include_tasks:
     file: ../tasks/core_tools.yml
 
-- name: Install and configure bat
-  ansible.builtin.include_tasks:
-    file: ../tasks/bat.yml
-
 #
 # Install zsh and make it the default shell
 # Add extensions using antidote plugin manager
@@ -37,6 +33,14 @@
 - name: Install antidote plugin manager and plugins for zsh
   ansible.builtin.include_tasks:
     file: ../tasks/antidote.yml
+
+#
+# Install bat (a cat substitute with steroids)
+# Note: needs zsh installed
+#
+- name: Install and configure bat
+  ansible.builtin.include_tasks:
+    file: ../tasks/bat.yml
 
 #
 # Install nerd fonts (JetBrains & FiraCode)
