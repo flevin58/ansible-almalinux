@@ -1,0 +1,12 @@
+# This file is the global gitignore for ALL projects
+# Run `git config --global core.excludesfile ~/.gitignore_global`
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+
+# Backup and temporary files
+*.bak
+~*
+#*

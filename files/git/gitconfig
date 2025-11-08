@@ -1,0 +1,9 @@
+[user]
+        name = Fernando Levin
+        email = flevin58@gmail.com
+[core]
+        excludesFile = ~/.gitignore_global
+        autocrlf = input
+        excludefiles = -l
+[pull]
+        rebase = true

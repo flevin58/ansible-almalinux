@@ -23,6 +23,10 @@
     - FiraCode
   when: ansible_distribution == "AlmaLinux"
 
+- name: Update font cache for AlmaLinux
+  ansible.builtin.shell: fc-cache -f
+  when: ansible_distribution == "AlmaLinux"
+
 #
 # MacOSX
 #
