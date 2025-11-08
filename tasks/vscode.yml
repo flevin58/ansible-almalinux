@@ -44,6 +44,7 @@
     - tamasfe.even-better-toml
     - vadimcn.vscode-lldb
     - xaver.clang-format
+    - ziglang.vscode-zig
 
 - name: Copy VS Code settings in AlmaLinux
   ansible.builtin.copy:

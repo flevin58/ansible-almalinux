@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Debug!
+      ansible.builtin.include_tasks:
+        file: ../tasks/zig.yml

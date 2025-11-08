@@ -6,3 +6,6 @@ mac:
 
 alma:
     ansible-playbook -K ./playbooks/AlmaLinux.yml
+
+debug:
+    ansible-playbook -K ./playbooks/debug_local.yml

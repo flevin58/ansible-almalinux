@@ -1,0 +1,31 @@
+---
+- name: Create directory for Zig binary & files
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/zig"
+    state: directory
+    mode: 0755
+
+- name: Install Zig
+  ansible.builtin.unarchive:
+    src: https://ziglang.org/builds/zig-aarch64-linux-0.16.0-dev.1240+b2895f356.tar.xz
+    dest: "{{ ansible_env.HOME }}/zig"
+    extra_opts: [--strip-components=1]
+    remote_src: true
+  when: ansible_distribution == 'AlmaLinux'
+
+- name: Install Zig
+  ansible.builtin.unarchive:
+    src: https://ziglang.org/builds/zig-aarch64-macos-0.16.0-dev.1240+b2895f356.tar.xz
+    dest: "{{ ansible_env.HOME }}/zig"
+    extra_opts: [--strip-components=1]
+    remote_src: true
+  when: ansible_distribution == 'MacOSX'
+
+- name: Ensure {{ ansible_env.HOME}}/zig is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    search_string: 'export PATH="$PATH:$HOME/zig"'
+    insertbefore: "^# PATH ending point"
+    line: 'export PATH="$PATH:$HOME/zig"'
+# TODO: Check if VS Code is installed and add Zig extension
+# Currently this is done by default in vscode.yml
