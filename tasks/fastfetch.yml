@@ -1,8 +1,15 @@
-- name: Install fastfetch
+- name: Install fastfetch on AlmaLinux
   become: true
   ansible.builtin.dnf:
     name: fastfetch
     state: latest
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install fastfetch on MacOS
+  community.general.homebrew:
+    name: fastfetch
+    state: present
+  when: ansible_distribution == "MacOSX"
 
 - name: Create fastfetch config directory
   ansible.builtin.file:

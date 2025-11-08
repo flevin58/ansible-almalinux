@@ -1,5 +1,8 @@
-install:
-    ansible-playbook -K -i ./inventory/hosts ./playbooks/almalinux.yml
+this:
+    ansible-playbook -K ./playbooks/M4-Nando.yml
 
-debug:
-    ansible-playbook -K -i ./inventory/hosts ./playbooks/debug.yml
+mac:
+    ansible-playbook -vvv -K ./playbooks/MacMini.yml
+
+alma:
+    ansible-playbook -K ./playbooks/AlmaLinux.yml

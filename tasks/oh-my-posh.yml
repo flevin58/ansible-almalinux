@@ -1,13 +1,20 @@
-- name: Install oh-my-posh
+- name: Install oh-my-posh on AlmaLinux
   ansible.builtin.shell:
     cmd: curl -s https://ohmyposh.dev/install.sh | bash -s
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install oh-my-posh on MacOS
+  community.general.homebrew:
+    name: oh-my-posh
+    state: present
+  when: ansible_distribution == "MacOSX"
 
 - name: Create directory for oh-my-posh configuration
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.config/oh-my-posh"
     state: directory
     mode: 0755
- 
+
 - name: Deploy oh-my-posh configuration file
   ansible.builtin.copy:
     src: ../files/oh-my-posh.toml

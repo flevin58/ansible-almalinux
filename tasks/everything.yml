@@ -1,0 +1,78 @@
+---
+- name: Allow passwordless sudo for {{ ansible_env.USER }}
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/{{ ansible_env.USER }}
+    create: yes
+    line: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: ALL"
+
+- name: Install dnf repositories
+  ansible.builtin.include_tasks:
+    file: ../tasks/dnf_repos.yml
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install core tools
+  ansible.builtin.include_tasks:
+    file: ../tasks/core_tools.yml
+
+- name: Install zsh and make it the default shell
+  ansible.builtin.include_tasks:
+    file: ../tasks/zsh.yml
+
+- name: Install antidote plugin manager and plugins for zsh
+  ansible.builtin.include_tasks:
+    file: ../tasks/antidote.yml
+
+- name: Install and configure bat
+  ansible.builtin.include_tasks:
+    file: ../tasks/bat.yml
+
+- name: Create user's .local/bin directory and ensure it's in PATH
+  ansible.builtin.include_tasks:
+    file: ../tasks/local_bin.yml
+
+- name: Install oh-my-posh
+  ansible.builtin.include_tasks:
+    file: ../tasks/oh-my-posh.yml
+
+- name: Install fonts
+  ansible.builtin.include_tasks:
+    file: ../tasks/fonts.yml
+
+- name: Update font cache for AlmaLinux
+  ansible.builtin.shell: fc-cache -f
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install and Configure bat
+  ansible.builtin.include_tasks:
+    file: ../tasks/bat.yml
+
+- name: Configure ptyxis for AlmaLinux
+  ansible.builtin.include_tasks:
+    file: ../tasks/ptyxis.yml
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install and configure wezterm for MacOSX
+  ansible.builtin.include_tasks:
+    file: ../tasks/wezterm.yml
+  when: ansible_distribution == "MacOSX"
+
+- name: Install VS Code
+  ansible.builtin.include_tasks:
+    file: ../tasks/vscode.yml
+
+- name: Install neovim
+  ansible.builtin.include_tasks:
+    file: ../tasks/neovim.yml
+
+- name: Install golang
+  ansible.builtin.include_tasks:
+    file: ../tasks/golang.yml
+
+- name: Install rust
+  ansible.builtin.include_tasks:
+    file: ../tasks/rust.yml
+
+- name: Install and configure fastfetch
+  ansible.builtin.include_tasks:
+    file: ../tasks/fastfetch.yml

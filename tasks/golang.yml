@@ -1,8 +1,15 @@
-- name: Install golang
+- name: Install golang on AlmaLinux
   become: true
   ansible.builtin.dnf:
     name: golang
-    state: latest
+    state: present
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install golang on MacOS
+  community.general.homebrew:
+    name: golang
+    state: present
+  when: ansible_distribution == "MacOSX"
 
 - name: Ensure "{{ ansible_env.HOME }}/go/bin is in PATH
   ansible.builtin.lineinfile:
@@ -13,10 +20,10 @@
 
 - name: Install gopls
   ansible.builtin.shell:
-    cmd: /usr/bin/go install golang.org/x/tools/gopls@latest
+    cmd: go install golang.org/x/tools/gopls@latest
     creates: "{{ ansible_env.HOME }}/go/bin/gopls"
 
 - name: Install Development
   ansible.builtin.shell:
-    cmd: /usr/bin/go install github.com/go-delve/delve/cmd/dlv@latest
+    cmd: go install github.com/go-delve/delve/cmd/dlv@latest
     creates: "{{ ansible_env.HOME }}/go/bin/delve"

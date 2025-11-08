@@ -1,0 +1,30 @@
+- name: Install core tools for AlmaLinux
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - clang-tools-extra
+      - clang
+      - curl
+      - fastfetch
+      - fzf
+      - gum
+      - just
+      - nodejs
+      - wget
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install core tools for MacOS
+  community.general.homebrew:
+    state: present
+    name:
+      - clang-format
+      - curl
+      - fastfetch
+      - fzf
+      - gnu-tar
+      - gum
+      - just
+      - nodejs
+      - wget
+  when: ansible_distribution == "MacOSX"

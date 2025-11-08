@@ -1,0 +1,48 @@
+---
+#
+# AlmaLinux
+#
+- name: Ensure fonts directory exists for AlmaLinux
+  file:
+    path: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - JetBrainsMono
+    - FiraCode
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Download and extract fonts for AlmaLinux
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
+    mode: 0775
+    remote_src: yes
+  with_items:
+    - JetBrainsMono
+    - FiraCode
+  when: ansible_distribution == "AlmaLinux"
+
+#
+# MacOSX
+#
+- name: Ensure fonts directory exists for MacOSX
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - JetBrainsMono
+    - FiraCode
+  when: ansible_distribution == "MacOSX"
+
+- name: Download and extract fonts for MacOSX
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"
+    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
+    mode: 0775
+    remote_src: yes
+  with_items:
+    - JetBrainsMono
+    - FiraCode
+  when: ansible_distribution == "MacOSX"

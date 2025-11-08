@@ -1,5 +1,6 @@
 ---
-- hosts: alma
+- hosts: localhost
+  connection: local
 
   tasks:
     - name: Install everything!

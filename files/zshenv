@@ -1,0 +1,14 @@
+#############################################
+# .zshenv                                   #
+# Gets sourced before .zshrc                #
+# Here are defined all global env vars      #
+#############################################
+
+# Ansible managed file - do not edit manually
+
+# PATH starting point
+export PATH=/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+# PATH ending point
+
+# ENV vars starting point
+# ENV vars ending point

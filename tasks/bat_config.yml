@@ -1,9 +1,0 @@
----
-- name: Define BAT theme in .zshenv
-  vars:
-    bat_theme_line: 'BAT_THEME="Visual Studio Dark+"'
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.zshenv"
-    search_string: "{{ bat_theme_line }}"
-    insertbefore: "^# ENV vars ending point"
-    line: "{{ bat_theme_line }}"
