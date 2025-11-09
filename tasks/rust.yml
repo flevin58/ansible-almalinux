@@ -11,6 +11,12 @@
     insertbefore: "^# PATH ending point"
     line: 'export PATH="$PATH:$HOME/.cargo/bin"'
 
+- name: Install VS Code extensions for Rust
+  ansible.builtin.command: "code --force --install-extension {{ item }}"
+  loop:
+    - rust-lang.rust-analyzer
+    - slint.slint
+
 - name: Install cargo-expand
   community.general.cargo:
     name: cargo-expand

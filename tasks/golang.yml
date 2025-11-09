@@ -18,6 +18,9 @@
     insertbefore: "^# PATH ending point"
     line: 'export PATH="$PATH:$HOME/go/bin"'
 
+- name: Install VS Code extensions for Golang
+  ansible.builtin.command: "code --force --install-extension golang.go"
+
 - name: Install gopls
   ansible.builtin.shell:
     cmd: go install golang.org/x/tools/gopls@latest

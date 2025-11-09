@@ -3,8 +3,6 @@
   ansible.builtin.dnf:
     state: present
     name:
-      - clang-tools-extra
-      - clang
       - curl
       - fastfetch
       - fzf
@@ -18,7 +16,6 @@
   community.general.homebrew:
     state: present
     name:
-      - clang-format
       - curl
       - fastfetch
       - fzf

@@ -6,8 +6,8 @@
   register: ptyxis_temp_file
 
 - name: Copy the Ptyxis configuration file to temp file
-  ansible.builtin.copy:
-    src: ../files/ptyxis.ini
+  ansible.builtin.template:
+    src: ../templates/ptyxis_ini.j2
     dest: "{{ ptyxis_temp_file.path }}"
 
 - name: Configure Ptyxis terminal emulator

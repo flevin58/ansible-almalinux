@@ -5,6 +5,6 @@
     state: present
 
 - name: Copy Wezterm configuration file
-  ansible.builtin.copy:
-    src: ../files/wezterm.lua
+  ansible.builtin.template:
+    src: ../files/wezterm_lua.j2
     dest: "{{ ansible_env.HOME }}/.wezterm.lua"

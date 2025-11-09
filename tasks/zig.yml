@@ -27,5 +27,6 @@
     search_string: 'export PATH="$PATH:$HOME/zig"'
     insertbefore: "^# PATH ending point"
     line: 'export PATH="$PATH:$HOME/zig"'
-# TODO: Check if VS Code is installed and add Zig extension
-# Currently this is done by default in vscode.yml
+
+- name: Install VS Code extension for Zig
+  ansible.builtin.command: "code --force --install-extension ziglang.vscode-zig"

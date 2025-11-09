@@ -1,0 +1,21 @@
+- name: Install c/cpp tools for AlmaLinux
+  become: true
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - clang-tools-extra
+      - clang
+  when: ansible_distribution == "AlmaLinux"
+
+- name: Install c/cpp tools for MacOS
+  community.general.homebrew:
+    state: present
+    name:
+      - clang-format
+  when: ansible_distribution == "MacOSX"
+
+- name: Install VS Code extensions for C/C++
+  ansible.builtin.command: "code --force --install-extension {{ item }}"
+  loop:
+    - llvm-vs-code-extensions.vscode-clangd
+    - xaver.clang-format

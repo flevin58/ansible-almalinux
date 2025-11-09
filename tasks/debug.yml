@@ -1,20 +1,9 @@
-- name: Debug!
-  ansible.builtin.debug:
-    msg:
-      - "github: {{ github }}"
-      - "languages: {{ languages }}"
+- name: read the html file
+  ansible.builtin.shell:
+    cmd:
+  set_fact:
+    file_lines: "{{ lookup('file', 'htmlfile.html').split('\n') }}"
 
-- name: Fonts
-  ansible.builtin.debug:
-    msg: "font -> {{ item }}"
-  with_items: "{{ nerd_fonts }}"
-
-- name: Go install
-  ansible.builtin.debug:
-    msg: "We are installing Go!"
-  when: languages.install_go
-
-- name: Zig install
-  ansible.builtin.debug:
-    msg: "We are installing Zig!"
-  when: languages.install_zig
+- debug:
+    var: file_lines
+    verbosity: 1

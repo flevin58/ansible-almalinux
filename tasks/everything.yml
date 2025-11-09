@@ -7,10 +7,6 @@
     line: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: ALL"
 
 #
-# TODO: Install & configure git
-#
-
-#
 # Configure repos & install core tools
 #
 - name: Install dnf repositories
@@ -35,6 +31,13 @@
     file: ../tasks/antidote.yml
 
 #
+# Configure github
+#
+- name: Install & configure github
+  ansible.builtin.include_tasks:
+    file: ../tasks/github.yml
+
+#
 # Install bat (a cat substitute with steroids)
 # Note: needs zsh installed
 #
@@ -43,7 +46,7 @@
     file: ../tasks/bat.yml
 
 #
-# Install nerd fonts (JetBrains & FiraCode)
+# Install nerd fonts
 #
 - name: Install fonts
   ansible.builtin.include_tasks:
@@ -95,14 +98,17 @@
 - name: Install golang
   ansible.builtin.include_tasks:
     file: ../tasks/golang.yml
+  when: install_go == true
 
 - name: Install rust
   ansible.builtin.include_tasks:
     file: ../tasks/rust.yml
+  when: install_rust == true
 
 - name: Install zig
   ansible.builtin.include_tasks:
-    file: ../tasks/rust.yml
+    file: ../tasks/zig.yml
+  when: install_zig == true
 
 #
 # Install a kool app to display os info in the terminal.

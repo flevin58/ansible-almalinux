@@ -1,21 +1,23 @@
 {
     "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "catppuccin-mocha",
     "window.zoomLevel": 1.52,
     "editor.fontSize": 14,
-    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontFamily": "{{ active_font }}",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
-    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "terminal.integrated.fontFamily": "{{ active_font }}",
     "terminal.integrated.fontLigatures.enabled": true,
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.lineHeight": 1.2,
     "terminal.integrated.tabs.location": "right",
-    "git.confirmSync": false,
-    "workbench.iconTheme": "catppuccin-mocha",
+    {% if install_cpp == true %}
     "[c]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "C_Cpp.intelliSenseEngine": "disabled",
-    "clang-format.fallbackStyle": "Google"
+    "clang-format.fallbackStyle": "Google",
+    {% endif %}
+    "git.confirmSync": false
 }

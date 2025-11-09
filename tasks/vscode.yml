@@ -28,36 +28,30 @@
   loop:
     - catppuccin.catppuccin-vsc
     - catppuccin.catppuccin-vsc-icons
-    - golang.go
     - gruntfuggly.todo-tree
-    - llvm-vs-code-extensions.vscode-clangd
     - ms-vscode.hexeditor
     - ms-vscode-remote.remote-ssh
     - ms-vscode-remote.remote-ssh-edit
     - ms-vscode.remote-explorer
     - nefrob.vscode-just-syntax
     - redhat.vscode-yaml
-    - rust-lang.rust-analyzer
     - shd101wyy.markdown-preview-enhanced
-    - slint.slint
     - sumneko.lua
     - tamasfe.even-better-toml
     - vadimcn.vscode-lldb
-    - xaver.clang-format
-    - ziglang.vscode-zig
 
 - name: Copy VS Code settings in AlmaLinux
-  ansible.builtin.copy:
+  ansible.builtin.template:
     force: yes
-    src: ../files/vscode_settings.json
+    src: ../templates/vscode_settings_json.j2
     dest: "{{ ansible_env.HOME }}/.config/Code/User/settings.json"
     mode: 0644
   when: ansible_distribution == "AlmaLinux"
 
 - name: Copy VS Code settings in MacOSX
-  ansible.builtin.copy:
+  ansible.builtin.template:
     force: yes
-    src: ../files/vscode_settings.json
+    src: ../templates/vscode_settings.j2
     dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings.json"
     mode: 0644
   when: ansible_distribution == "MacOSX"

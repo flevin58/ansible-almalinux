@@ -2,11 +2,32 @@ github:
   full_name: "Fernando Levin"
   email: "flevin58@gmail.com"
 
-languages:
-  install_go: true
-  install_rust: true
-  install_zig: false
+#
+# Define which programming languages to install
+# Includes VS Code extensions
+# Note: cpp -> clang / clang-format / clangd lsp server
+#
+install_go: true
+install_rust: true
+install_zig: true
+install_cpp: true
 
+#
+# Nerd fonts page: https://www.nerdfonts.com/font-downloads
+# Caution: the name of the active_font will be used in wezterm, ptyxis, vscode, etc.
+#          and mispelling will cause rollback to a default font or worse!!!
+#
+active_font: "JetBrainsMono Nerd Font"
 nerd_fonts:
   - FiraCode
   - JetBrainsMono
+  - Lilex
+  - RobotoMono
+
+antidote_plugins:
+  - zsh-users/zsh-syntax-highlighting
+  - zsh-users/zsh-autosuggestions
+  - zsh-users/zsh-completions
+  - zsh-users/zsh-history-substring-search
+  - MichaelAquilina/zsh-you-should-use
+  - Aloxaf/fzf-tab
