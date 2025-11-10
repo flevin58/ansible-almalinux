@@ -1,9 +1,5 @@
-- name: read the html file
-  ansible.builtin.shell:
-    cmd:
-  set_fact:
-    file_lines: "{{ lookup('file', 'htmlfile.html').split('\n') }}"
-
-- debug:
-    var: file_lines
-    verbosity: 1
+- name: Copy ssh gh keys to target host
+  ansible.builtin.copy:
+    src: $HOME/.ssh
+    dest: "{{ ansible_env.HOME }}/.ssh"
+  with_fileglob: "git*"

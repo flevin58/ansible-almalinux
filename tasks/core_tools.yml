@@ -8,7 +8,9 @@
       - fzf
       - gum
       - just
+      - luarocks
       - nodejs
+      - ripgrep
       - wget
   when: ansible_distribution == "AlmaLinux"
 
@@ -22,6 +24,8 @@
       - gnu-tar
       - gum
       - just
+      - luarocks
       - nodejs
+      - ripgrep
       - wget
   when: ansible_distribution == "MacOSX"
