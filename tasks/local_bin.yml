@@ -8,6 +8,6 @@
 - name: Ensure {{ ansible_env.HOME}}/.cargo/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshenv"
+    insertafter: "^export PATH="
     search_string: 'export PATH="$PATH:$HOME/.local/bin"'
-    insertbefore: "^# PATH ending point"
     line: 'export PATH="$PATH:$HOME/.local/bin"'

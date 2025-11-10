@@ -7,6 +7,7 @@ github:
 # Includes VS Code extensions
 # Note: cpp -> clang / clang-format / clangd lsp server
 #
+projects_dir: "$HOME/Progetti"
 install_go: true
 install_rust: true
 install_zig: true

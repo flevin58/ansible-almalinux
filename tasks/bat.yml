@@ -42,10 +42,8 @@
       }
 
 - name: Define BAT theme in .zshenv
-  vars:
-    bat_theme_line: 'BAT_THEME="Catppuccin Mocha"'
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshenv"
-    search_string: "{{ bat_theme_line }}"
-    insertbefore: "^# ENV vars ending point"
-    line: "{{ bat_theme_line }}"
+    insertafter: "^# ENV"
+    search_string: "^export BAT_THEME="
+    line: 'export BAT_THEME="Catppuccin Mocha"'

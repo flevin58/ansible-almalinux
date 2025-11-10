@@ -14,8 +14,8 @@
 - name: Ensure "{{ ansible_env.HOME }}/go/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshenv"
+    insertafter: "^export PATH="
     search_string: 'export PATH="$PATH:$HOME/go/bin"'
-    insertbefore: "^# PATH ending point"
     line: 'export PATH="$PATH:$HOME/go/bin"'
 
 - name: Install VS Code extensions for Golang
