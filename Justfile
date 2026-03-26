@@ -8,7 +8,7 @@ debug:
     ansible-playbook ./playbooks/debug.yml
 
 alma:
-    ansible-playbook -K ./playbooks/alma.ymg
+    ansible-playbook -K ./playbooks/alma.yml
 
 ssh_keys:
     scp ~/.ssh/git* flevin58@alma:~/.ssh
