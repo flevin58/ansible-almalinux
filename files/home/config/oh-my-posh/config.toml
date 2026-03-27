@@ -1,4 +1,32 @@
-version = 3
+version = 4
+
+[palette]
+battery_bg = '#f36943'
+battery_bg_charging = '#b8e994'
+battery_bg_discharging = '#fff34e'
+battery_bg_full = '#33DD2D'
+battery_fg = '#262626'
+date_bg = '#6d1d8f'
+date_fg = '#ffffff'
+exec_time_bg = '#83769c'
+exec_time_fg = '#ffffff'
+git_bg = '#FFFB38'
+git_bg_ahead = '#C792EA'
+git_bg_ahead_and_behind = '#c5e478'
+git_bg_behind = '#C792EA'
+git_bg_changed = '#ffeb95'
+git_fg = '#011627'
+git_staging_changed = '#ef5350'
+lang_bg = '#5aa95a'
+lang_fg = '#000000'
+os_bg = '#F0F0F0'
+os_fg = '#000000'
+path_bg = '#FF9248'
+path_fg = '#2d3436'
+prompt_err = '#ef5350'
+prompt_ok = '#e0f8ff'
+root_bg = '#ef5350'
+root_fg = '#FFFB38'
 
 [upgrade]
 source = 'cdn'
@@ -6,66 +34,24 @@ interval = '168h'
 auto = false
 notice = false
 
-[palette]
-#
-# All used colors are mapped here!
-# Modify to change theme
-#
-os_fg = '#000000'
-os_bg = '#F0F0F0'
-root_fg = '#FFFB38'
-root_bg = '#ef5350'
-path_fg = '#2d3436'
-path_bg = '#FF9248'
-lang_fg = '#000000'
-lang_bg = '#5aa95a'
-git_fg = '#011627'
-git_bg = '#FFFB38'
-git_bg_behind = '#C792EA'
-git_bg_ahead = '#C792EA'
-git_bg_ahead_and_behind = '#c5e478'
-git_bg_changed = '#ffeb95'
-git_staging_changed = '#ef5350'
-exec_time_fg = '#ffffff'
-exec_time_bg = '#83769c'
-battery_fg = '#262626'
-battery_bg = '#f36943'
-battery_bg_charging = '#b8e994'
-battery_bg_discharging = '#fff34e'
-battery_bg_full = '#33DD2D'
-date_fg = '#ffffff'
-date_bg = '#40c4ff'
-prompt_ok = '#e0f8ff'
-prompt_err = '#ef5350'
-
-#===================================================================================
-# First line - left side
-#
 [[blocks]]
 type = 'prompt'
 alignment = 'left'
 
-#-----------------------------------------------------------------------------------
-# Operating System Icon
-#
 [[blocks.segments]]
 leading_diamond = ''
 trailing_diamond = ''
-template = ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+template = ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} {{.HostName}} '
 foreground = 'p:os_fg'
 background = 'p:os_bg'
 type = 'os'
 style = 'diamond'
 
-[blocks.segments.properties]
+[blocks.segments.options]
 linux = ''
 macos = ''
 windows = ''
-#-----------------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------------
-# Root user
-#
 [[blocks.segments]]
 trailing_diamond = ''
 template = '<parentBackground></>  '
@@ -73,11 +59,7 @@ foreground = 'p:root_fg'
 background = 'p:root_bg'
 type = 'root'
 style = 'diamond'
-#-----------------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------------
-# Current Path
-#
 [[blocks.segments]]
 trailing_diamond = ' '
 foreground = 'p:path_fg'
@@ -85,19 +67,13 @@ background = 'p:path_bg'
 type = 'path'
 style = 'diamond'
 
-[blocks.segments.properties]
+[blocks.segments.options]
 folder_icon = '  '
 home_icon = '  '
 max_depth = 3
 style = 'agnoster_full'
+'~/dotfiles' = '★dotfiles'
 
-# [blocks.segments.properties.mapped_locations]
-"~/dotfiles" = "★dotfiles"
-#-----------------------------------------------------------------------------------
-
-#-----------------------------------------------------------------------------------
-# Languages
-#
 [[blocks.segments]]
 trailing_diamond = ' '
 template = 'Python {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}'
@@ -130,9 +106,6 @@ background = 'p:lang_bg'
 type = 'zig'
 style = 'diamond'
 
-#-----------------------------------------------------------------------------------
-# Github
-#
 [[blocks.segments]]
 trailing_diamond = ' '
 template = ' {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:git_staging_changed>  {{ .Staging.String }}</>{{ end }} '
@@ -147,22 +120,15 @@ background_templates = [
   '{{ if gt .Behind 0 }}p:git_bg_behind{{ end }}',
 ]
 
-[blocks.segments.properties]
+[blocks.segments.options]
 branch_icon = ' '
 fetch_status = true
 fetch_upstream_icon = true
-#-----------------------------------------------------------------------------------
 
-#===================================================================================
-# First line - right side
-#
 [[blocks]]
 type = 'prompt'
 alignment = 'right'
 
-#-----------------------------------------------------------------------------------
-# Execution time
-#
 [[blocks.segments]]
 leading_diamond = ''
 trailing_diamond = ''
@@ -172,14 +138,10 @@ background = 'p:exec_time_bg'
 type = 'executiontime'
 style = 'diamond'
 
-[blocks.segments.properties]
+[blocks.segments.options]
 style = 'roundrock'
 threshold = 0
-#-----------------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------------
-# Battery
-#
 [[blocks.segments]]
 trailing_diamond = ''
 template = ' {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} '
@@ -194,15 +156,11 @@ background_templates = [
 ]
 invert_powerline = true
 
-[blocks.segments.properties]
+[blocks.segments.options]
 charged_icon = ' '
 charging_icon = ' '
 discharging_icon = ' '
-#-----------------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------------
-# Date and Time
-#
 [[blocks.segments]]
 trailing_diamond = ''
 template = '  {{ .CurrentDate | date .Format }} '
@@ -212,13 +170,9 @@ type = 'time'
 style = 'diamond'
 invert_powerline = true
 
-[blocks.segments.properties]
-time_format = "Mon 3:04 PM"
-#-----------------------------------------------------------------------------------
+[blocks.segments.options]
+time_format = 'Mon 3:04 PM'
 
-#===================================================================================
-# Second line
-#
 [[blocks]]
 type = 'prompt'
 alignment = 'left'
@@ -231,6 +185,5 @@ type = 'status'
 style = 'plain'
 foreground_templates = ['{{ if gt .Code 0 }}p:prompt_err{{ end }}']
 
-[blocks.segments.properties]
+[blocks.segments.options]
 always_enabled = true
-#===================================================================================

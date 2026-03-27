@@ -1,6 +1,6 @@
-- name: Install core tools for AlmaLinux
+- name: Install core tools for Ubuntu
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.apt:
     state: present
     name:
       - curl
@@ -12,7 +12,7 @@
       - nodejs
       - ripgrep
       - wget
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install core tools for MacOS
   community.general.homebrew:

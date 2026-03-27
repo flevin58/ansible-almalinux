@@ -22,5 +22,5 @@
 - name: Copy configutation files for neovim
   ansible.builtin.copy:
     force: yes
-    src: ../files/nvim/
+    src: ../files/home/config/nvim/
     dest: "{{ ansible_env.HOME }}/.config/nvim/"

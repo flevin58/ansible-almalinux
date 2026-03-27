@@ -1,17 +1,21 @@
 ---
-- name: Install zsh for AlmaLinux
+#
+# UBUNTU DOESN'T COME WITH ZSH INSTALLED!
+#
+
+- name: Install zsh for Ubuntu
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.apt:
     name: zsh
     state: latest
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_distribution == "Ubuntu"
 
-- name: Change default shell to zsh on AlmaLinux
+- name: Change default shell to zsh on Ubuntu
   become: true
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: "/usr/bin/zsh"
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Change default shell to zsh on MacOS
   become: true
@@ -20,20 +24,40 @@
     shell: "/bin/zsh"
   when: ansible_distribution == "MacOSX"
 
+#
+# DEPLOY CONFIGURATION FILES (COMMON TO MACOS & UBUNTU)
+#
+
 - name: Deploy .zshenv configuration file
   ansible.builtin.copy:
-    src: ../files/zshenv
+    src: ../files/home/zshenv
     dest: "{{ ansible_env.HOME }}/.zshenv"
     mode: 0644
 
 - name: Deploy .zshrc configuration file
   ansible.builtin.copy:
-    src: ../files/zshrc
+    src: ../files/home/zshrc
     dest: "{{ ansible_env.HOME }}/.zshrc"
     mode: 0644
 
 - name: Copy the zsh custom files directory
   ansible.builtin.copy:
-    src: ../files/zsh/
+    src: ../files/home/config/zsh/
     dest: "{{ ansible_env.HOME }}/.config/zsh/"
     mode: 0755
+
+#
+# ANTIDOTE PLUGIN MANAGER FOR ZSH
+#
+
+- name: Install Antidote plugin manager for zsh
+  ansible.builtin.git:
+    repo: https://github.com/mattmc3/antidote.git
+    depth: 1
+    dest: "{{ ansible_env.HOME }}/.antidote"
+
+- name: Install Antidote plugins file
+  ansible.builtin.copy:
+    src: ../files/home/zsh_plugins.txt
+    dest: "{{ ansible_env.HOME }}/.zsh_plugins.txt"
+    mode: 0644

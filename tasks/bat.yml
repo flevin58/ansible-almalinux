@@ -1,10 +1,10 @@
 ---
-- name: Install bat on AlmaLinux (BAT - A cat clone with wings)
+- name: Install bat on Ubuntu (BAT - A cat clone with wings)
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.apt:
     name: bat
     state: present
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install bat on MacOS (BAT - A cat clone with wings)
   community.general.homebrew:

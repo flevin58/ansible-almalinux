@@ -1,4 +1,6 @@
-# Add basic aliases
+#====================================
+# Ansible generated file, DO NOT EDIT
+#====================================
 # alias ls="eza --icons=always"
 alias ls="ls --color"
 alias ll="ls -l"

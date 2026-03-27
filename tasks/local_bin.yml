@@ -5,7 +5,7 @@
     mode: 0775
     state: directory
 
-- name: Ensure {{ ansible_env.HOME}}/.cargo/bin is in PATH
+- name: Ensure {{ ansible_env.HOME}}/.local/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshenv"
     insertafter: "^export PATH="

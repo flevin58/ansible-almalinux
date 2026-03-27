@@ -1,7 +1,7 @@
-- name: Install oh-my-posh on AlmaLinux
+- name: Install oh-my-posh on Ubuntu
   ansible.builtin.shell:
     cmd: curl -s https://ohmyposh.dev/install.sh | bash -s
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install oh-my-posh on MacOS
   community.general.homebrew:
@@ -9,14 +9,19 @@
     state: present
   when: ansible_distribution == "MacOSX"
 
-- name: Create directory for oh-my-posh configuration
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/oh-my-posh"
-    state: directory
-    mode: 0755
-
-- name: Deploy oh-my-posh configuration file
+- name: Copy the oh-my-posh directory
   ansible.builtin.copy:
-    src: ../files/oh-my-posh.toml
-    dest: "{{ ansible_env.HOME }}/.config/oh-my-posh/config.toml"
-    mode: 0644
+    src: ../files/home/config/oh-my-posh/
+    dest: "{{ ansible_env.HOME }}/.config/oh-my-posh/"
+    mode: 0755
+# - name: Create directory for oh-my-posh configuration
+#   ansible.builtin.file:
+#     path: "{{ ansible_env.HOME }}/.config/oh-my-posh"
+#     state: directory
+#     mode: 0755
+
+# - name: Deploy oh-my-posh configuration file
+#   ansible.builtin.copy:
+#     src: ../files/oh-my-posh.toml
+#     dest: "{{ ansible_env.HOME }}/.config/oh-my-posh/config.toml"
+#     mode: 0644

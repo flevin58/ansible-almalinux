@@ -1,4 +1,7 @@
 ---
+#
+# Allow passwordless sudo
+#
 - name: Allow passwordless sudo for {{ ansible_env.USER }}
   become: true
   ansible.builtin.lineinfile:
@@ -9,11 +12,6 @@
 #
 # Configure repos & install core tools
 #
-- name: Install dnf repositories
-  ansible.builtin.include_tasks:
-    file: ../tasks/dnf_repos.yml
-  when: ansible_distribution == "AlmaLinux"
-
 - name: Install core tools
   ansible.builtin.include_tasks:
     file: ../tasks/core_tools.yml
@@ -25,10 +23,6 @@
 - name: Install zsh and make it the default shell
   ansible.builtin.include_tasks:
     file: ../tasks/zsh.yml
-
-- name: Install antidote plugin manager and plugins for zsh
-  ansible.builtin.include_tasks:
-    file: ../tasks/antidote.yml
 
 #
 # Configure github
@@ -67,18 +61,11 @@
     file: ../tasks/oh-my-posh.yml
 
 #
-# Install & configure terminal app
+# Configure terminal app
 # Note: JetBrains nerd font should be installed
 #
-- name: Configure ptyxis for AlmaLinux
-  ansible.builtin.include_tasks:
-    file: ../tasks/ptyxis.yml
-  when: ansible_distribution == "AlmaLinux"
-
-- name: Install and configure wezterm for MacOSX
-  ansible.builtin.include_tasks:
-    file: ../tasks/wezterm.yml
-  when: ansible_distribution == "MacOSX"
+# T.B.D. !!!
+#
 
 #
 # Install editors (Neovim & VS Code)

@@ -1,4 +1,6 @@
-# Add go-related aliases
+#====================================
+# Ansible generated file, DO NOT EDIT
+#====================================
 alias gor="go run ."
 alias got="go test -v ./..."
 alias goi="go install"

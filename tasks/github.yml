@@ -1,7 +1,7 @@
 ---
 - name: Set global gitignore file
   ansible.builtin.copy:
-    src: ../files/git/gitignore_global
+    src: ../files/home/gitignore_global
     dest: "{{ ansible_env.HOME }}/.gitignore_global"
 
 - name: Set global config file
