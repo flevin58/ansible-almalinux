@@ -1,44 +1,42 @@
 ---
 #
-# AlmaLinux
+# Ubuntu
 #
-- name: Ensure fonts directory exists for AlmaLinux
+- name: Ensure fonts directory exists for Ubuntu
   file:
-    path: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
+    path: "{{ ansible_facts.user_dir }}/.local/share/fonts/{{ item }}"
     state: directory
     mode: 0755
   with_items: "{{ nerd_fonts }}"
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_facts.distribution == "Ubuntu"
 
-- name: Download and extract fonts for AlmaLinux
+- name: Download and extract fonts for Ubuntu
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"
-    dest: "{{ ansible_env.HOME }}/.local/share/fonts/{{ item }}"
+    dest: "{{ ansible_facts.user_dir }}/.local/share/fonts/{{ item }}"
     mode: 0775
     remote_src: yes
   with_items: "{{ nerd_fonts }}"
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_facts.distribution == "Ubuntu"
 
-- name: Update font cache for AlmaLinux
+- name: Update font cache for Ubuntu
   ansible.builtin.shell: fc-cache -f
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_facts.distribution == "Ubuntu"
 
 #
 # MacOSX
 #
 - name: Ensure fonts directory exists for MacOSX
   file:
-    path: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
+    path: "{{ ansible_facts.user_dir }}/Library/Fonts/{{ item }}"
     state: directory
-    mode: 0755
   with_items: "{{ nerd_fonts }}"
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
 
 - name: Download and extract fonts for MacOSX
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"
-    dest: "{{ ansible_env.HOME }}/Library/Fonts/{{ item }}"
-    mode: 0775
+    dest: "{{ ansible_facts.user_dir }}/Library/Fonts/{{ item }}"
     remote_src: yes
   with_items: "{{ nerd_fonts }}"
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"

@@ -1,0 +1,10 @@
+---
+- name: Set global gitignore file
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/files/home/gitignore_global"
+    dest: "{{ ansible_facts.user_dir }}/.gitignore_global"
+
+- name: Set global config file
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/templates/gitconfig.j2"
+    dest: "{{ ansible_facts.user_dir }}/.gitconfig"

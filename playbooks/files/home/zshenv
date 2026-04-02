@@ -6,7 +6,8 @@
 
 # Ansible managed file - do not edit manually
 
-# PATH definitions
-export PATH=/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+# PATH starting point
+# PATH ending point
 
-# ENVIRONMENT variables
+# ENV vars starting point
+# ENV vars ending point

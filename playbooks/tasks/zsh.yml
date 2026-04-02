@@ -7,22 +7,23 @@
   become: true
   ansible.builtin.apt:
     name: zsh
-    state: latest
-  when: ansible_distribution == "Ubuntu"
+    state: present
+    update_cache: true
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Change default shell to zsh on Ubuntu
   become: true
   ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
+    name: "{{ ansible_facts.user_id }}"
     shell: "/usr/bin/zsh"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Change default shell to zsh on MacOS
   become: true
   ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
+    name: "{{ ansible_facts.user_id }}"
     shell: "/bin/zsh"
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
 
 #
 # DEPLOY CONFIGURATION FILES (COMMON TO MACOS & UBUNTU)
@@ -31,20 +32,17 @@
 - name: Deploy .zshenv configuration file
   ansible.builtin.copy:
     src: ../files/home/zshenv
-    dest: "{{ ansible_env.HOME }}/.zshenv"
-    mode: 0644
+    dest: "{{ ansible_facts.user_dir }}/.zshenv"
 
 - name: Deploy .zshrc configuration file
   ansible.builtin.copy:
     src: ../files/home/zshrc
-    dest: "{{ ansible_env.HOME }}/.zshrc"
-    mode: 0644
+    dest: "{{ ansible_facts.user_dir }}/.zshrc"
 
 - name: Copy the zsh custom files directory
   ansible.builtin.copy:
     src: ../files/home/config/zsh/
-    dest: "{{ ansible_env.HOME }}/.config/zsh/"
-    mode: 0755
+    dest: "{{ ansible_facts.user_dir }}/.config/zsh/"
 
 #
 # ANTIDOTE PLUGIN MANAGER FOR ZSH
@@ -54,10 +52,9 @@
   ansible.builtin.git:
     repo: https://github.com/mattmc3/antidote.git
     depth: 1
-    dest: "{{ ansible_env.HOME }}/.antidote"
+    dest: "{{ ansible_facts.user_dir }}/.antidote"
 
 - name: Install Antidote plugins file
   ansible.builtin.copy:
     src: ../files/home/zsh_plugins.txt
-    dest: "{{ ansible_env.HOME }}/.zsh_plugins.txt"
-    mode: 0644
+    dest: "{{ ansible_facts.user_dir }}/.zsh_plugins.txt"

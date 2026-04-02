@@ -2,12 +2,12 @@
 - name: Install rust
   ansible.builtin.shell:
     cmd: curl -s --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+    creates: "{{ ansible_facts.user_dir }}/.cargo/bin/cargo"
 
-- name: Ensure {{ ansible_env.HOME}}/.cargo/bin is in PATH
+- name: Ensure {{ ansible_facts.user_dir}}/.cargo/bin is in PATH
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.zshenv"
-    insertafter: "^export PATH="
+    path: "{{ ansible_facts.user_dir }}/.zshenv"
+    insertbefore: "^# PATH ending point"
     search_string: 'export PATH="$PATH:$HOME/.cargo/bin"'
     line: 'export PATH="$PATH:$HOME/.cargo/bin"'
 

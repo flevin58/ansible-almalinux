@@ -1,26 +1,33 @@
 ---
-- name: Install neovim for AlmaLinux
+- name: Install neovim for Ubuntu
   become: true
   ansible.builtin.unarchive:
     src: "https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-arm64.tar.gz"
     dest: /usr
     extra_opts: [--strip-components=1]
     remote_src: true
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Install neovim for MacOS
   community.general.homebrew:
     name: neovim
     state: present
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
 
 - name: Delete current neovim config directory if it exists
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/nvim"
+    path: "{{ ansible_facts.user_dir }}/.config/nvim"
     state: absent
 
 - name: Copy configutation files for neovim
   ansible.builtin.copy:
-    force: yes
+    force: true
     src: ../files/home/config/nvim/
-    dest: "{{ ansible_env.HOME }}/.config/nvim/"
+    dest: "{{ ansible_facts.user_dir }}/.config/nvim/"
+
+- name: Ensure neovim is in PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts.user_dir }}/.zshenv"
+    insertbefore: "^# ENV vars ending point"
+    search_string: "EDITOR=nvim"
+    line: "EDITOR=/opt/homebrew/bin/nvim"

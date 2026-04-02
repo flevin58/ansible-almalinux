@@ -1,0 +1,15 @@
+- name: Install oh-my-posh on Ubuntu
+  ansible.builtin.shell:
+    cmd: curl -s https://ohmyposh.dev/install.sh | bash -s
+  when: ansible_facts.distribution == "Ubuntu"
+
+- name: Install oh-my-posh on MacOS
+  community.general.homebrew:
+    name: oh-my-posh
+    state: present
+  when: ansible_facts.distribution == "MacOSX"
+
+- name: Copy the oh-my-posh directory
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/files/home/config/oh-my-posh/"
+    dest: "{{ ansible_facts.user_dir }}/.config/oh-my-posh/"

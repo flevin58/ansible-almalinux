@@ -7,8 +7,8 @@ remote:
 debug:
     ansible-playbook ./playbooks/debug.yml
 
-alma:
-    ansible-playbook -K ./playbooks/alma.yml
+m1:
+    ansible-playbook ./playbooks/m1.yml
 
 ssh_keys:
     scp ~/.ssh/git* flevin58@alma:~/.ssh

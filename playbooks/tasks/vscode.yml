@@ -5,8 +5,8 @@
         name: vscode
         description: Visual Studio Code
         baseurl: https://packages.microsoft.com/yumrepos/vscode
-        enabled: yes
-        gpgcheck: yes
+        enabled: true
+        gpgcheck: true
         gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
     - name: Install VS Code
@@ -14,14 +14,14 @@
       ansible.builtin.dnf:
         name: code
         state: latest
-  when: ansible_distribution == "AlmaLinux"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Create a symbolic link for MacOSX to /usr/bin/code
   ansible.builtin.file:
     src: "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
     dest: /opt/homebrew/bin/code
     state: link
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
 
 - name: Install VS Code extensions
   ansible.builtin.command: "code --force --install-extension {{ item }}"
@@ -40,18 +40,16 @@
     - tamasfe.even-better-toml
     - vadimcn.vscode-lldb
 
-- name: Copy VS Code settings in AlmaLinux
+- name: Copy VS Code settings in Ubuntu
   ansible.builtin.template:
-    force: yes
-    src: ../templates/vscode_settings_json.j2
-    dest: "{{ ansible_env.HOME }}/.config/Code/User/settings.json"
-    mode: 0644
-  when: ansible_distribution == "AlmaLinux"
+    force: true
+    src: "{{ playbook_dir }}/templates/vscode_settings_json.j2"
+    dest: "{{ ansible_facts.user_dir }}/.config/Code/User/settings.json"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Copy VS Code settings in MacOSX
   ansible.builtin.template:
-    force: yes
-    src: ../templates/vscode_settings.j2
-    dest: "{{ ansible_env.HOME }}/Library/Application Support/Code/User/settings.json"
-    mode: 0644
-  when: ansible_distribution == "MacOSX"
+    force: true
+    src: "{{ playbook_dir }}/templates/vscode_settings_json.j2"
+    dest: "{{ ansible_facts.user_dir }}/Library/Application Support/Code/User/settings.json"
+  when: ansible_facts.distribution == "MacOSX"

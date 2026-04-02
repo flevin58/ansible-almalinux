@@ -12,7 +12,7 @@
       - nodejs
       - ripgrep
       - wget
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Install core tools for MacOS
   community.general.homebrew:
@@ -28,4 +28,4 @@
       - nodejs
       - ripgrep
       - wget
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"

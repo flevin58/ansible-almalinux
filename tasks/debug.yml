@@ -1,5 +1,0 @@
-- name: Copy ssh gh keys to target host
-  ansible.builtin.copy:
-    src: $HOME/.ssh
-    dest: "{{ ansible_env.HOME }}/.ssh"
-  with_fileglob: "git*"

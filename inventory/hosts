@@ -1,5 +1,6 @@
-[local]
+[mac]
+M1-Nando.local
 M4-Nando.local
 
-[remote]
-M1-Nando.local
+[linux]
+Ubu-Laptop.local

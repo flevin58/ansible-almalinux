@@ -4,25 +4,23 @@
   ansible.builtin.apt:
     name: bat
     state: present
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
 
 - name: Install bat on MacOS (BAT - A cat clone with wings)
   community.general.homebrew:
     name: bat
     state: present
-  when: ansible_distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
 
 - name: Create BAT config directory
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/bat/themes"
+    path: "{{ ansible_facts.user_dir }}/.config/bat/themes"
     state: directory
-    mode: 0755
 
 - name: Install BAT Catppuccin Theme
   ansible.builtin.get_url:
     url: "{{ item.url }}"
-    dest: "{{ ansible_env.HOME }}/.config/bat/themes/{{ item.name }}"
-    mode: 0644
+    dest: "{{ ansible_facts.user_dir }}/.config/bat/themes/{{ item.name }}"
   loop:
     - {
         url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme,
@@ -43,7 +41,7 @@
 
 - name: Define BAT theme in .zshenv
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.zshenv"
-    insertafter: "^# ENV"
+    path: "{{ ansible_facts.user_dir }}/.zshenv"
+    insertbefore: "^# ENV vars ending point"
     search_string: "^export BAT_THEME="
     line: 'export BAT_THEME="Catppuccin Mocha"'

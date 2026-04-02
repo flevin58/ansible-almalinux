@@ -2,19 +2,19 @@
 #
 # Allow passwordless sudo
 #
-- name: Allow passwordless sudo for {{ ansible_env.USER }}
+- name: Allow passwordless sudo for {{ ansible_facts.user_id }}
   become: true
   ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/{{ ansible_env.USER }}
+    path: /etc/sudoers.d/{{ ansible_facts.user_id }}
     create: yes
-    line: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: ALL"
+    line: "{{ ansible_facts.user_id }} ALL=(ALL) NOPASSWD: ALL"
 
 #
 # Configure repos & install core tools
 #
 - name: Install core tools
   ansible.builtin.include_tasks:
-    file: ../tasks/core_tools.yml
+    file: "{{ playbook_dir }}/tasks/core_tools.yml"
 
 #
 # Install zsh and make it the default shell
@@ -22,14 +22,14 @@
 #
 - name: Install zsh and make it the default shell
   ansible.builtin.include_tasks:
-    file: ../tasks/zsh.yml
+    file: "{{ playbook_dir }}/tasks/zsh.yml"
 
 #
 # Configure github
 #
 - name: Install & configure github
   ansible.builtin.include_tasks:
-    file: ../tasks/github.yml
+    file: "{{ playbook_dir }}/tasks/github.yml"
 
 #
 # Install bat (a cat substitute with steroids)
@@ -37,28 +37,28 @@
 #
 - name: Install and configure bat
   ansible.builtin.include_tasks:
-    file: ../tasks/bat.yml
+    file: "{{ playbook_dir }}/tasks/bat.yml"
 
 #
 # Install nerd fonts
 #
 - name: Install fonts
   ansible.builtin.include_tasks:
-    file: ../tasks/fonts.yml
+    file: "{{ playbook_dir }}/tasks/fonts.yml"
 
 #
 # Add the user's local bin folder
 #
 - name: Create user's .local/bin directory and ensure it's in PATH
   ansible.builtin.include_tasks:
-    file: ../tasks/local_bin.yml
+    file: "{{ playbook_dir }}/tasks/local_bin.yml"
 
 #
 # Install a kool prompt
 #
 - name: Install oh-my-posh
   ansible.builtin.include_tasks:
-    file: ../tasks/oh-my-posh.yml
+    file: "{{ playbook_dir }}/tasks/oh-my-posh.yml"
 
 #
 # Configure terminal app
@@ -72,11 +72,11 @@
 #
 - name: Install VS Code
   ansible.builtin.include_tasks:
-    file: ../tasks/vscode.yml
+    file: "{{ playbook_dir }}/tasks/vscode.yml"
 
 - name: Install neovim
   ansible.builtin.include_tasks:
-    file: ../tasks/neovim.yml
+    file: "{{ playbook_dir }}/tasks/neovim.yml"
 
 #
 # Install programming languages (Golang, Rust, Zig)
@@ -84,17 +84,17 @@
 #
 - name: Install golang
   ansible.builtin.include_tasks:
-    file: ../tasks/golang.yml
+    file: "{{ playbook_dir }}/tasks/golang.yml"
   when: install_go == true
 
 - name: Install rust
   ansible.builtin.include_tasks:
-    file: ../tasks/rust.yml
+    file: "{{ playbook_dir }}/tasks/rust.yml"
   when: install_rust == true
 
 - name: Install zig
   ansible.builtin.include_tasks:
-    file: ../tasks/zig.yml
+    file: "{{ playbook_dir }}/tasks/zig.yml"
   when: install_zig == true
 
 #
@@ -103,4 +103,4 @@
 #
 - name: Install and configure fastfetch
   ansible.builtin.include_tasks:
-    file: ../tasks/fastfetch.yml
+    file: "{{ playbook_dir }}/tasks/fastfetch.yml"

@@ -7,11 +7,12 @@ github:
 # Includes VS Code extensions
 # Note: cpp -> clang / clang-format / clangd lsp server
 #
-projects_dir: "$HOME/Workspace"
-install_go: true
-install_rust: true
-install_zig: true
-install_cpp: true
+projects_dir: "$HOME/Projects"
+install_go: false
+install_rust: false
+install_zig: false
+install_cpp: false
+install_c3: false
 
 #
 # Nerd fonts page: https://www.nerdfonts.com/font-downloads

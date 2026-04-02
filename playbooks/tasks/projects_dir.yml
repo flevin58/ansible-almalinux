@@ -3,11 +3,10 @@
   ansible.builtin.file:
     path: "{{ projects_dir }}"
     state: directory
-    mode: 0755
 
 - name: Ensure $PROJECTS is set to {{ projects_dir }}
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.zshenv"
-    insertafter: "^# ENV"
+    path: "{{ ansible_facts.user_dir }}/.zshenv"
+    insertbefore: "^# ENV vars ending point"
     search_string: "export PROJECTS="
     line: 'export PROJECTS="{{ projects_dir }}"'
