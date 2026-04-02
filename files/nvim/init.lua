@@ -1,3 +1,2 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
-require("toodle").setup()
+-- Entry point for Neovim configuration
+require("config")
