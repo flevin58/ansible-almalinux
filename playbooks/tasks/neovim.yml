@@ -25,9 +25,9 @@
     src: ../files/home/config/nvim/
     dest: "{{ ansible_facts.user_dir }}/.config/nvim/"
 
-- name: Ensure neovim is in PATH
+- name: Ensure neovim is set as default editor
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
     insertbefore: "^# ENV vars ending point"
-    search_string: "EDITOR=nvim"
-    line: "EDITOR=/opt/homebrew/bin/nvim"
+    search_string: "export EDITOR=nvim"
+    line: "export EDITOR=/opt/homebrew/bin/nvim"
