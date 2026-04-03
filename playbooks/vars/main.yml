@@ -27,11 +27,11 @@ core_tools:
   - wget
 #
 # Define which programming languages to install
-# Note: lua and c/cpp are default
+# Note: lua is installed by default
 # Includes VS Code extensions
-# Note: cpp -> clang / clang-format / clangd lsp server
 #
 projects_dir: "$HOME/Projects"
+install_cpp: true
 install_go: true
 install_rust: true
 install_zig: true
@@ -44,7 +44,6 @@ install_c3: false
 develop_tools:
   - prettier
   - prettierd
-  - clang-format
   - lua-language-server
   - stylua
   - shfmt

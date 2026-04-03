@@ -58,16 +58,16 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/oh-my-posh.yml"
 #
-# Configure terminal app
-# Note: JetBrains nerd font should be installed
-#
-# T.B.D. !!!
-#
-
-#
 # Install editors (Neovim & VS Code)
 #
 - name: Install VS Code
+  #
+  # Configure terminal app
+  # Note: JetBrains nerd font should be installed
+  #
+  # T.B.D. !!!
+  #
+
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/vscode.yml"
 - name: Install neovim
@@ -77,6 +77,10 @@
 # Install programming languages (Golang, Rust, Zig)
 # Note: VS Code should be installed to add extensions
 #
+- name: Install cpp
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/cpp.yml"
+  when: install_cpp == true
 - name: Install golang
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/golang.yml"
