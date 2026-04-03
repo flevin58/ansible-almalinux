@@ -1,4 +1,3 @@
----
 #
 # Ubuntu
 #
@@ -6,23 +5,18 @@
   file:
     path: "{{ ansible_facts.user_dir }}/.local/share/fonts/{{ item }}"
     state: directory
-    mode: 0755
   with_items: "{{ nerd_fonts }}"
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Download and extract fonts for Ubuntu
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"
     dest: "{{ ansible_facts.user_dir }}/.local/share/fonts/{{ item }}"
-    mode: 0775
     remote_src: yes
   with_items: "{{ nerd_fonts }}"
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Update font cache for Ubuntu
   ansible.builtin.shell: fc-cache -f
   when: ansible_facts.distribution == "Ubuntu"
-
 #
 # MacOSX
 #
@@ -32,7 +26,6 @@
     state: directory
   with_items: "{{ nerd_fonts }}"
   when: ansible_facts.distribution == "MacOSX"
-
 - name: Download and extract fonts for MacOSX
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/{{ item }}.tar.xz"

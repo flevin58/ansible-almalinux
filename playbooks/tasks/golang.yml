@@ -1,6 +1,6 @@
 - name: Install golang on Ubuntu
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.apt:
     name: golang
     state: present
   when: ansible_facts.distribution == "Ubuntu"
