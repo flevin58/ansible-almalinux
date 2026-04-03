@@ -1,0 +1,14 @@
+#
+# Install develop tools
+#
+- name: Install develop tools
+  become: true
+  ansible.builtin.apt:
+    state: present
+    name: "{{ develop_tools }}"
+  when: ansible_facts.distribution == "Ubuntu"
+- name: Install core tools
+  community.general.homebrew:
+    state: present
+    name: "{{ develop_tools }}"
+  when: ansible_facts.distribution == "MacOSX"
