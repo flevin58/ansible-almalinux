@@ -19,7 +19,6 @@ core_tools:
   - curl
   - fastfetch
   - fzf
-  - gum
   - just
   - luarocks
   - nodejs
