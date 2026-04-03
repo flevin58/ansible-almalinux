@@ -1,8 +1,6 @@
----
 #
 # UBUNTU DOESN'T COME WITH ZSH INSTALLED!
 #
-
 - name: Install zsh for Ubuntu
   become: true
   ansible.builtin.apt:
@@ -10,51 +8,42 @@
     state: present
     update_cache: true
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Change default shell to zsh on Ubuntu
   become: true
   ansible.builtin.user:
     name: "{{ ansible_facts.user_id }}"
     shell: "/usr/bin/zsh"
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Change default shell to zsh on MacOS
   become: true
   ansible.builtin.user:
     name: "{{ ansible_facts.user_id }}"
     shell: "/bin/zsh"
   when: ansible_facts.distribution == "MacOSX"
-
 #
 # DEPLOY CONFIGURATION FILES (COMMON TO MACOS & UBUNTU)
 #
-
 - name: Deploy .zshenv configuration file
-  ansible.builtin.copy:
-    src: ../files/home/zshenv
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/templates/zshenv.j2"
     dest: "{{ ansible_facts.user_dir }}/.zshenv"
-
 - name: Deploy .zshrc configuration file
   ansible.builtin.copy:
-    src: ../files/home/zshrc
+    src: "{{ playbook_dir}}/files/home/zshrc"
     dest: "{{ ansible_facts.user_dir }}/.zshrc"
-
 - name: Copy the zsh custom files directory
   ansible.builtin.copy:
-    src: ../files/home/config/zsh/
+    src: "{{ playbook_dir}}/files/home/config/zsh/"
     dest: "{{ ansible_facts.user_dir }}/.config/zsh/"
-
 #
 # ANTIDOTE PLUGIN MANAGER FOR ZSH
 #
-
 - name: Install Antidote plugin manager for zsh
   ansible.builtin.git:
     repo: https://github.com/mattmc3/antidote.git
     depth: 1
     dest: "{{ ansible_facts.user_dir }}/.antidote"
-
 - name: Install Antidote plugins file
-  ansible.builtin.copy:
-    src: ../files/home/zsh_plugins.txt
+  ansible.builtin.template:
+    src: "{{ playbook_dir }}/templates/zsh_plugins.j2"
     dest: "{{ ansible_facts.user_dir }}/.zsh_plugins.txt"

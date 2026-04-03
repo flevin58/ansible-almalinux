@@ -1,19 +1,27 @@
 github:
   full_name: "Fernando Levin"
   email: "flevin58@gmail.com"
-
+#
+# Used by the zshenv template and by tasks adding variables
+# New entries will be added before env_end / path_end
+# or after env_start / path_start
+#
+zshenv:
+  path_start: "# PATH starting point"
+  path_end: "# PATH ending point"
+  env_start: "# ENV vars starting point"
+  env_end: "# ENV vars ending point"
 #
 # Define which programming languages to install
 # Includes VS Code extensions
 # Note: cpp -> clang / clang-format / clangd lsp server
 #
 projects_dir: "$HOME/Projects"
-install_go: false
-install_rust: false
-install_zig: false
-install_cpp: false
+install_go: true
+install_rust: true
+install_zig: true
+install_cpp: true
 install_c3: false
-
 #
 # Nerd fonts page: https://www.nerdfonts.com/font-downloads
 # Caution: the name of the active_font will be used in wezterm, ptyxis, vscode, etc.
@@ -25,7 +33,6 @@ nerd_fonts:
   - JetBrainsMono
   - Lilex
   - RobotoMono
-
 antidote_plugins:
   - zsh-users/zsh-syntax-highlighting
   - zsh-users/zsh-autosuggestions
