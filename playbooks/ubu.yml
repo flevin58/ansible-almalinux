@@ -1,0 +1,9 @@
+- hosts: Ubu-Laptop.local
+  connection: local
+  vars_files:
+    - "{{ playbook_dir }}/vars/main.yml"
+  tasks:
+    - name: Install everything for M1
+      ansible.builtin.include_tasks:
+        file: "{{ playbook_dir }}/tasks/everything.yml"
+      when: ansible_facts.hostname == "M4-Nando"
