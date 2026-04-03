@@ -1,5 +1,0 @@
-- name: Add ssh hosts to iTerm2 ssh connections
-  ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/iterm2_ssh.j2"
-    dest: "{{ ansible_facts.user_dir }}/Library/Application Support/iTerm2/DynamicProfiles/ssh.json"
-  when: ansible_facts.distribution == "MacOSX"

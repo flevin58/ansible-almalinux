@@ -64,12 +64,8 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/vscode.yml"
 #
-# Configure iTerm2
+# Install Neovim
 #
-- name: Configure iTerm2 (Only on MacOs)
-  ansible.builtin.include_tasks:
-    file: "{{ playbook_dir }}/tasks/iterm2.yml"
-  when: ansible_facts.distribution == "MacOSX"
 - name: Install neovim
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/neovim.yml"
