@@ -2,17 +2,26 @@
   ansible.builtin.shell:
     cmd: curl -s --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     creates: "{{ ansible_facts.user_dir }}/.cargo/bin/cargo"
+#
+# Add rust to PATH
+#
 - name: Ensure {{ ansible_facts.user_dir}}/.cargo/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
     insertbefore: "{{ zshenv.path_end }}"
     search_string: "$HOME/.cargo/bin"
     line: 'export PATH="$PATH:$HOME/.cargo/bin"'
+#
+# Install rust VSCode extension
+#
 - name: Install VS Code extensions for Rust
   ansible.builtin.command: "code --force --install-extension {{ item }}"
   loop:
     - rust-lang.rust-analyzer
     - slint.slint
+#
+# Install rust tools
+#
 - name: Install cargo-expand
   community.general.cargo:
     name: cargo-expand

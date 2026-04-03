@@ -9,14 +9,23 @@
     name: golang
     state: present
   when: ansible_facts.distribution == "MacOSX"
+#
+# Add golang to PATH
+#
 - name: Ensure "{{ ansible_facts.user_dir }}/go/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
     insertbefore: "{{ zshenv.path_end }}"
     search_string: "$HOME/go/bin"
     line: 'export PATH="$PATH:$HOME/go/bin"'
-- name: Install VS Code extensions for Golang
+#
+# Install golang VSCode extension
+#
+- name: Install VS Code extension for Golang
   ansible.builtin.command: "code --force --install-extension golang.go"
+#
+# Install golang tools
+#
 # Go Language Server
 - name: Install gopls
   ansible.builtin.shell:

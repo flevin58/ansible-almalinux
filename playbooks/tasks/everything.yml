@@ -1,4 +1,3 @@
----
 #
 # Allow passwordless sudo
 #
@@ -8,14 +7,18 @@
     path: /etc/sudoers.d/{{ ansible_facts.user_id }}
     create: yes
     line: "{{ ansible_facts.user_id }} ALL=(ALL) NOPASSWD: ALL"
-
 #
-# Configure repos & install core tools
+# Install core tools
 #
 - name: Install core tools
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/core_tools.yml"
-
+#
+# Install develop tools
+#
+- name: Install develop tools
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/develop_tools.yml"
 #
 # Install zsh and make it the default shell
 # Add extensions using antidote plugin manager
@@ -23,14 +26,12 @@
 - name: Install zsh and make it the default shell
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/zsh.yml"
-
 #
 # Configure github
 #
 - name: Install & configure github
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/github.yml"
-
 #
 # Install bat (a cat substitute with steroids)
 # Note: needs zsh installed
@@ -38,28 +39,24 @@
 - name: Install and configure bat
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/bat.yml"
-
 #
 # Install nerd fonts
 #
 - name: Install fonts
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/fonts.yml"
-
 #
 # Add the user's local bin folder
 #
 - name: Create user's .local/bin directory and ensure it's in PATH
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/local_bin.yml"
-
 #
 # Install a kool prompt
 #
 - name: Install oh-my-posh
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/oh-my-posh.yml"
-
 #
 # Configure terminal app
 # Note: JetBrains nerd font should be installed
@@ -73,11 +70,9 @@
 - name: Install VS Code
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/vscode.yml"
-
 - name: Install neovim
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/neovim.yml"
-
 #
 # Install programming languages (Golang, Rust, Zig)
 # Note: VS Code should be installed to add extensions
@@ -86,17 +81,14 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/golang.yml"
   when: install_go == true
-
 - name: Install rust
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/rust.yml"
   when: install_rust == true
-
 - name: Install zig
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/zig.yml"
   when: install_zig == true
-
 #
 # Install a kool app to display os info in the terminal.
 # Leave this as the last task!

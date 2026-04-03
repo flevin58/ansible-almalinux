@@ -1,20 +1,15 @@
-- name: Install core tools for Ubuntu
+#
+# Install core tools
+#
+- name: Install core tools
   become: true
   ansible.builtin.apt:
     state: present
-    name:
-      - curl
-      - fastfetch
-      - fzf
-      - gum
-      - just
-      - luarocks
-      - nodejs
-      - ripgrep
-      - wget
+    name: "{{ core_tools }}"
   when: ansible_facts.distribution == "Ubuntu"
-- name: Install core tools for MacOS
+- name: Install core tools
   community.general.homebrew:
     state: present
     name: "{{ core_tools }}"
   when: ansible_facts.distribution == "MacOSX"
+

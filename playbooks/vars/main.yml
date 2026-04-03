@@ -13,6 +13,7 @@ zshenv:
   env_end: "#-- ENV vars ending point"
 #
 # Define the list of core tools to install
+# Used by task core_tools.yml
 #
 core_tools:
   - curl
@@ -26,6 +27,7 @@ core_tools:
   - wget
 #
 # Define which programming languages to install
+# Note: lua and c/cpp are default
 # Includes VS Code extensions
 # Note: cpp -> clang / clang-format / clangd lsp server
 #
@@ -33,8 +35,21 @@ projects_dir: "$HOME/Projects"
 install_go: true
 install_rust: true
 install_zig: true
-install_cpp: true
 install_c3: false
+#
+# Define the list of developer tools to install
+# These include formatters, lsp, linters etc.
+# Used by task dev_tools.yml and by nvim
+#
+develop_tools:
+  - prettier
+  - prettierd
+  - clang-format
+  - lua-language-server
+  - stylua
+  - shfmt
+  - tombi
+  - yamlfmt
 #
 # Nerd fonts page: https://www.nerdfonts.com/font-downloads
 # Caution: the name of the active_font will be used in wezterm, ptyxis, vscode, etc.
