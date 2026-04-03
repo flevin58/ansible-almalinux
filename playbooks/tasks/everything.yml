@@ -61,15 +61,15 @@
 # Install editors (Neovim & VS Code)
 #
 - name: Install VS Code
-  #
-  # Configure terminal app
-  # Note: JetBrains nerd font should be installed
-  #
-  # T.B.D. !!!
-  #
-
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/vscode.yml"
+#
+# Configure iTerm2
+#
+- name: Configure iTerm2 (Only on MacOs)
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/iterm2.yml"
+  when: ansible_facts.distribution == "MacOSX"
 - name: Install neovim
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/neovim.yml"

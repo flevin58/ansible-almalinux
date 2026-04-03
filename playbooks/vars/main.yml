@@ -67,3 +67,13 @@ antidote_plugins:
   - zsh-users/zsh-history-substring-search
   - MichaelAquilina/zsh-you-should-use
   - Aloxaf/fzf-tab
+#
+# List of hosts to ssh from iTerm2
+#
+ssh_hosts:
+  - name: M1-Nando
+    address: m1-nando.local
+  - name: M4-Nando
+    address: m4-nando.local
+  - name: Ubu-Laptop
+    address: ubu-laptop.local

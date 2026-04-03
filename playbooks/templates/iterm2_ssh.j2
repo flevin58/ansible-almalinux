@@ -1,0 +1,13 @@
+{
+  "Profiles": [
+    {% for host in ssh_hosts %}
+    {
+       "Name": "{{ host.name }}",
+       "Guid": "{{ host.name }}",
+       "Custom Command" : "Yes",
+       "Command" : "ssh {{ host.address }}",
+    },
+    {% endfor %}
+  ]
+}
+
