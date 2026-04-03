@@ -13,19 +13,8 @@
       - ripgrep
       - wget
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Install core tools for MacOS
   community.general.homebrew:
     state: present
-    name:
-      - curl
-      - fastfetch
-      - fzf
-      - gnu-tar
-      - gum
-      - just
-      - luarocks
-      - nodejs
-      - ripgrep
-      - wget
+    name: "{{ core_tools }}"
   when: ansible_facts.distribution == "MacOSX"

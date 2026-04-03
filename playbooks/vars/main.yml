@@ -12,6 +12,19 @@ zshenv:
   env_start: "#-- ENV vars starting point"
   env_end: "#-- ENV vars ending point"
 #
+# Define the list of core tools to install
+#
+core_tools:
+  - curl
+  - fastfetch
+  - fzf
+  - gum
+  - just
+  - luarocks
+  - nodejs
+  - ripgrep
+  - wget
+#
 # Define which programming languages to install
 # Includes VS Code extensions
 # Note: cpp -> clang / clang-format / clangd lsp server
