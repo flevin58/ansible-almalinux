@@ -49,6 +49,7 @@ develop_tools:
   - shfmt
   - tombi
   - yamlfmt
+  - jq
 #
 # Nerd fonts page: https://www.nerdfonts.com/font-downloads
 # Caution: the name of the active_font will be used in wezterm, ptyxis, vscode, etc.
