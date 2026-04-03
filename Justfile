@@ -4,8 +4,8 @@ local:
 remote:
     ansible-playbook -K ./playbooks/remote.yml
 
-debug:
-    ansible-playbook ./playbooks/debug.yml
+facts:
+    ansible-playbook ./playbooks/facts.yml > facts.txt
 
 m1:
     ansible-playbook ./playbooks/m1.yml
