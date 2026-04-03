@@ -10,6 +10,9 @@ facts:
 m1:
     ansible-playbook ./playbooks/m1.yml
 
+m4:
+    ansible-playbook ./playbooks/m4.yml
+
 ssh_keys:
     scp ~/.ssh/git* flevin58@alma:~/.ssh
     scp ~/.ssh/git* flevin58@MacMini.local:~/.ssh
