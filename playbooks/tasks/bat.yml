@@ -1,47 +1,30 @@
----
 - name: Install bat on Ubuntu (BAT - A cat clone with wings)
   become: true
   ansible.builtin.apt:
     name: bat
     state: present
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Install bat on MacOS (BAT - A cat clone with wings)
   community.general.homebrew:
     name: bat
     state: present
   when: ansible_facts.distribution == "MacOSX"
-
 - name: Create BAT config directory
   ansible.builtin.file:
     path: "{{ ansible_facts.user_dir }}/.config/bat/themes"
     state: directory
-
 - name: Install BAT Catppuccin Theme
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "{{ ansible_facts.user_dir }}/.config/bat/themes/{{ item.name }}"
   loop:
-    - {
-        url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme,
-        name: "Catppuccin Latte.tmTheme",
-      }
-    - {
-        url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme,
-        name: "Catppuccin Frappe.tmTheme",
-      }
-    - {
-        url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme,
-        name: "Catppuccin Macchiato.tmTheme",
-      }
-    - {
-        url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme,
-        name: "Catppuccin Mocha.tmTheme",
-      }
-
+    - {url: 'https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme', name: "Catppuccin Latte.tmTheme"}
+    - {url: 'https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme', name: "Catppuccin Frappe.tmTheme"}
+    - {url: 'https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme', name: "Catppuccin Macchiato.tmTheme"}
+    - {url: 'https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme', name: "Catppuccin Mocha.tmTheme"}
 - name: Define BAT theme in .zshenv
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
-    insertbefore: "^# ENV vars ending point"
-    search_string: "^export BAT_THEME="
+    insertbefore: "{{ zshenv.env_end }}"
+    search_string: "BAT_THEME="
     line: 'export BAT_THEME="Catppuccin Mocha"'

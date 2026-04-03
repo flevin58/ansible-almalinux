@@ -1,12 +1,10 @@
----
 - name: Create {{ ansible_facts.user_dir }}/.local/bin directory
   ansible.builtin.file:
     path: "{{ ansible_facts.user_dir }}/.local/bin"
     state: directory
-
 - name: Ensure {{ ansible_facts.user_dir}}/.local/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
-    insertbefore: "^# PATH ending point"
-    search_string: 'export PATH="$PATH:$HOME/.local/bin"'
+    insertbefore: "{{ zshenv.path_end }}"
+    search_string: "$HOME/.local/bin"
     line: 'export PATH="$PATH:$HOME/.local/bin"'

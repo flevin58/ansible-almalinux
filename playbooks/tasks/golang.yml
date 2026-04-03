@@ -4,41 +4,34 @@
     name: golang
     state: present
   when: ansible_facts.distribution == "Ubuntu"
-
 - name: Install golang on MacOS
   community.general.homebrew:
     name: golang
     state: present
   when: ansible_facts.distribution == "MacOSX"
-
 - name: Ensure "{{ ansible_facts.user_dir }}/go/bin is in PATH
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
-    insertbefore: "^# PATH ending point"
-    search_string: 'export PATH="$PATH:$HOME/go/bin"'
+    insertbefore: "{{ zshenv.path_end }}"
+    search_string: "$HOME/go/bin"
     line: 'export PATH="$PATH:$HOME/go/bin"'
-
 - name: Install VS Code extensions for Golang
   ansible.builtin.command: "code --force --install-extension golang.go"
-
 # Go Language Server
 - name: Install gopls
   ansible.builtin.shell:
     cmd: go install golang.org/x/tools/gopls@latest
     creates: "{{ ansible_facts.user_dir }}/go/bin/gopls"
-
 # Go debugger
 - name: Install delve
   ansible.builtin.shell:
     cmd: go install github.com/go-delve/delve/cmd/dlv@latest
     creates: "{{ ansible_facts.user_dir }}/go/bin/delve"
-
 # Go code formatter
 - name: Install gofumpt
   ansible.builtin.shell:
     cmd: go install mvdan.cc/gofumpt@latest
     creates: "{{ ansible_facts.user_dir }}/go/bin/gofumpt"
-
 # Go code imports manager
 - name: Install goimports
   ansible.builtin.shell:
