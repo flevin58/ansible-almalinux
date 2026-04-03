@@ -13,6 +13,9 @@ m1:
 m4:
     ansible-playbook ./playbooks/m4.yml
 
+ubu:
+    ansible-playbook ./playbooks/ubu.yml
+
 ssh_keys:
     scp ~/.ssh/git* flevin58@alma:~/.ssh
     scp ~/.ssh/git* flevin58@MacMini.local:~/.ssh
