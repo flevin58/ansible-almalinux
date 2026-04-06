@@ -18,3 +18,7 @@
   loop:
     - llvm-vs-code-extensions.vscode-clangd
     - xaver.clang-format
+- name: Copy the clang-format config file to user's home folder
+  ansible.builtin.copy:
+    src: "{{ playbook_dir}}/files/home/clang-format"
+    dest: "{{ ansible_facts.user_dir }}/.clang-format"
