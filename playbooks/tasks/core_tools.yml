@@ -12,4 +12,3 @@
     state: present
     name: "{{ core_tools }}"
   when: ansible_facts.distribution == "MacOSX"
-

@@ -1,6 +1,6 @@
 - name: Install neovim for Ubuntu
   become: true
-  community.general.apt:
+  ansible.builtin.apt:
     name: neovim
     state: present
   when: ansible_facts.distribution == "Ubuntu"
