@@ -1,0 +1,13 @@
+- name: Download and extract c3 formatter
+  ansible.builtin.unarchive:
+    src: "https://github.com/lmichaudel/c3fmt/releases/download/v0.2.3/c3fmt-macos"
+    dest: "{{ ansible_facts.user_dir }}/Downloads"
+    remote_src: yes
+- name: Copy the formatter into .loca/bin
+  ansible.builtin.copy:
+    src: "{{ ansible_facts.user_dir }}/Downloads/server/bin/release/c3fmt-macos"
+    dest: "{{ ansible_facts.user_dir }}/.local/bin/c3fmt"
+- name: Delete the downloaded folder
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/Downloads/server"
+    state: absent
