@@ -16,3 +16,4 @@ alias vim=nvim
 alias vienv="vim ~/.env"
 alias tree="tree -C"
 alias gtree="tree --gitignore"
+alias brewup="brew update && brew upgrade"
