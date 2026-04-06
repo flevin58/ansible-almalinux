@@ -41,6 +41,7 @@ install_c3: false
 # Used by task dev_tools.yml and by nvim
 #
 develop_tools:
+  - raylib
   - prettier
   - prettierd
   - lua-language-server
