@@ -10,6 +10,7 @@ local servers = {
 	"gopls",
 	"pyright",
 	"zls",
+	"c3lsp",
 }
 
 for _, server in ipairs(servers) do
@@ -44,3 +45,9 @@ vim.lsp.config["clangd"] = {
 	filetypes = { "c", "cpp" },
 }
 vim.lsp.enable("clangd")
+
+vim.lsp.config["c3lsp"] = {
+	cmd = { "c3lsp" },
+	filetypes = { "c3", "c3i" },
+}
+vim.lsp.enable("c3lsp")
