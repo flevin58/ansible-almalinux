@@ -20,18 +20,18 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/develop_tools.yml"
 #
-# Add a PROJECTS folder
-#
-- name: Install a Projects folder
-  ansible.builtin.include_tasks:
-    file: "{{ playbook_dir }}/tasks/projects_dir.yml"
-#
 # Install zsh and make it the default shell
 # Add extensions using antidote plugin manager
 #
 - name: Install zsh and make it the default shell
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/zsh.yml"
+#
+# Add a PROJECTS folder
+#
+- name: Install a Projects folder
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/projects_dir.yml"
 #
 # Configure github
 #
