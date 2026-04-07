@@ -42,6 +42,7 @@ install_c3: true
 # Used by task dev_tools.yml and by nvim
 #
 develop_tools:
+  - pkg-config
   - raylib
   - prettier
   - prettierd
