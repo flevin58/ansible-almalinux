@@ -1,13 +1,19 @@
-- name: Download and extract c3 formatter
+- name: Download c3 formatter to user's .local/bin folder
+  ansible.builtin.get_url:
+    url: "https://github.com/lmichaudel/c3fmt/releases/download/v0.2.3/c3fmt-macos"
+    dest: "{{ ansible_facts.user_dir }}/.local/bin/c3fmt"
+    mode: 0755
+- name: Download the c3lsp zip archive to user's Dowenload folder
   ansible.builtin.unarchive:
-    src: "https://github.com/lmichaudel/c3fmt/releases/download/v0.2.3/c3fmt-macos"
+    src: "https://github.com/pherrymason/c3-lsp/releases/download/v0.4.0/c3lsp-darwin-arm64.zip"
     dest: "{{ ansible_facts.user_dir }}/Downloads"
     remote_src: yes
-- name: Copy the formatter into .loca/bin
+- name: Copy the c3lsp file from the "server" folder to the user's .local/bin folder
   ansible.builtin.copy:
-    src: "{{ ansible_facts.user_dir }}/Downloads/server/bin/release/c3fmt-macos"
-    dest: "{{ ansible_facts.user_dir }}/.local/bin/c3fmt"
-- name: Delete the downloaded folder
+    src: "{{ ansible_facts.user_dir }}/Downloads/server/bin/release/c3lsp"
+    dest: "{{ ansible_facts.user_dir }}/.local/bin/c3lsp"
+    mode: 0755
+- name: Remove the extracted "server" folder
   ansible.builtin.file:
     path: "{{ ansible_facts.user_dir }}/Downloads/server"
     state: absent
