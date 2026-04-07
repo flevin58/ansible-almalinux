@@ -16,6 +16,7 @@ zshenv:
 # Used by task core_tools.yml
 #
 core_tools:
+  - cmake
   - curl
   - fastfetch
   - fzf
