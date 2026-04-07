@@ -34,7 +34,7 @@ install_cpp: true
 install_go: true
 install_rust: true
 install_zig: true
-install_c3: false
+install_c3: true
 #
 # Define the list of developer tools to install
 # These include formatters, lsp, linters etc.
