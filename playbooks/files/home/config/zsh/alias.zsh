@@ -3,17 +3,10 @@
 #====================================
 # Modern ls & tree alternatives with eza
 alias ls="eza --icons=auto"
-alias ll="ls -l"
-alias lt="ls -lt"
-alias la="ls -al"
-# git-ignore vbersions of the above
-alias gls="ls --git-ignore"
-alias gll="gls -l"
-alias glt="gls -lt"
-alias gla="gls -al"
+alias lsg="eza --icons=auto --git-ignore"
 # tree versions
 alias tree="eza --tree"
-alias gtree="tree --git-ignore"
+alias treeg="tree --git-ignore"
 # Folder shortcuts
 alias godev="cd $PROJECTS"
 alias gopro="cd $PROJECTS"
