@@ -40,6 +40,6 @@
 - name: Set EZA_CONFIG_DIR
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts.user_dir }}/.zshenv"
-    insertbefore: "{{ zshenv.path_end }}"
+    insertbefore: "{{ zshenv.env_end }}"
     search_string: "$HOME/.config/eza"
     line: 'export EZA_CONFIG_DIR="$HOME/.config/eza"'

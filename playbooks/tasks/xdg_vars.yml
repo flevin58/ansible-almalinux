@@ -1,0 +1,42 @@
+# ======================================
+# Create all standards XDG env variables
+# ======================================
+#
+# XDG_DATA_HOME
+#
+- name: Create XDG_DATA_HOME
+  ansible.builtin.file:
+    path: "{{ansible_facts.user_dir}}/.local/share"
+    state: directory
+- name: Ensure XDG_DATA_HOME is set
+  ansible.builtin.lineinfile:
+    path: "{{ansible_facts.user_dir}}/.zshenv"
+    insertbefore: "{{ zshenv.env_end }}"
+    search_string: "XDG_DATA_HOME="
+    line: 'export XDG_DATA_HOME="$HOME/.local/share"'
+#
+# XDG_CONFIG_HOME
+#
+- name: Create XDG_CONFIG_HOME
+  ansible.builtin.file:
+    path: "{{ansible_facts.user_dir}}/.config"
+    state: directory
+- name: Ensure XDG_CONFIG_HOME is set
+  ansible.builtin.lineinfile:
+    path: "{{ansible_facts.user_dir}}/.zshenv"
+    insertbefore: "{{ zshenv.env_end }}"
+    search_string: "XDG_CONFIG_HOME="
+    line: 'export XDG_CONFIG_HOME="$HOME/.config"'
+#
+# XDG_STATE_HOME
+#
+- name: Create XDG_STATE_HOME
+  ansible.builtin.file:
+    path: "{{ansible_facts.user_dir}}/.local/state"
+    state: directory
+- name: Ensure XDG_STATE_HOME is set
+  ansible.builtin.lineinfile:
+    path: "{{ansible_facts.user_dir}}/.zshenv"
+    insertbefore: "{{ zshenv.env_end }}"
+    search_string: "XDG_STATE_HOME="
+    line: 'export XDG_STATE_HOME="$HOME/.local/state"'

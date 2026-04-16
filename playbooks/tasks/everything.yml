@@ -27,6 +27,12 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/zsh.yml"
 #
+# Set XDG variables
+#
+- name: Set XDG env vars
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/xdg_vars.yml"
+#
 # Install EZA (needs zsh to be already installed)
 #
 - name: Install eza
