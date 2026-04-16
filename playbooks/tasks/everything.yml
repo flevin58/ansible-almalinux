@@ -14,12 +14,6 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/core_tools.yml"
 #
-# Install EZA
-#
-- name: Install eza
-  ansible.builtin.include_tasks:
-    file: "{{ playbook_dir }}/tasks/eza.yml"
-#
 # Install develop tools
 #
 - name: Install develop tools
@@ -32,6 +26,12 @@
 - name: Install zsh and make it the default shell
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/zsh.yml"
+#
+# Install EZA (needs zsh to be already installed)
+#
+- name: Install eza
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/eza.yml"
 #
 # Add a PROJECTS folder
 #
