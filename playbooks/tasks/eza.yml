@@ -1,0 +1,44 @@
+# Install eza
+- name: Install eza
+  community.general.homebrew:
+    state: present
+    name: "eza"
+# Create a temp folder where to clone the repo
+# Store it in ezacat
+- name: Create temporary repo folder
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: eza
+  register: ezacat
+- name: Debug
+  debug: msg="{{ ezacat.path }}"
+- name: Install eza catppuccin themes
+  ansible.builtin.git:
+    clone: true
+    repo: "https://github.com/catppuccin/eza.git"
+    depth: 1
+    dest: "{{ ezacat.path }}"
+# Copy the themes folder
+- name: Copy eza themes folder
+  ansible.builtin.copy:
+    src: "{{ ezacat.path }}/themes/"
+    dest: "{{ ansible_facts.user_dir }}/.config/eza/themes"
+# Create a symbolic link to- name: Create symbolic link 
+- name: Link theme.yml to default theme catppuccin-mocha-yellow
+  ansible.builtin.file:
+    src: "{{ ansible_facts.user_dir }}/.config/eza/themes/mocha/catppuccin-mocha-yellow.yml"
+    dest: "{{ ansible_facts.user_dir }}/.config/eza/theme.yml"
+    state: link
+# Remove the temp folder
+- name: Remove temporary repo folder
+  ansible.builtin.file:
+    path: "{{ ezacat.path }}"
+    state: absent
+  when: ezacat.path is defined
+# Set the EZA config path
+- name: Set EZA_CONFIG_DIR
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts.user_dir }}/.zshenv"
+    insertbefore: "{{ zshenv.path_end }}"
+    search_string: "$HOME/.config/eza"
+    line: 'export EZA_CONFIG_DIR="$HOME/.config/eza"'

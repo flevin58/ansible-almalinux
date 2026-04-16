@@ -14,6 +14,12 @@
   ansible.builtin.include_tasks:
     file: "{{ playbook_dir }}/tasks/core_tools.yml"
 #
+# Install EZA
+#
+- name: Install eza
+  ansible.builtin.include_tasks:
+    file: "{{ playbook_dir }}/tasks/eza.yml"
+#
 # Install develop tools
 #
 - name: Install develop tools
