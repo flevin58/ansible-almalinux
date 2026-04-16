@@ -15,7 +15,7 @@
 - name: Install eza catppuccin themes
   ansible.builtin.git:
     clone: true
-    repo: "https://github.com/catppuccin/eza.git"
+    repo: "https://github.com/eza-community/eza-themes.git"
     depth: 1
     dest: "{{ ezacat.path }}"
 # Copy the themes folder
@@ -26,8 +26,9 @@
 # Create a symbolic link to- name: Create symbolic link 
 - name: Link theme.yml to default theme catppuccin-mocha-yellow
   ansible.builtin.file:
-    src: "{{ ansible_facts.user_dir }}/.config/eza/themes/mocha/catppuccin-mocha-yellow.yml"
+    src: "{{ ansible_facts.user_dir }}/.config/eza/themes/catppuccin-mocha.yml"
     dest: "{{ ansible_facts.user_dir }}/.config/eza/theme.yml"
+    force: true
     state: link
 # Remove the temp folder
 - name: Remove temporary repo folder
