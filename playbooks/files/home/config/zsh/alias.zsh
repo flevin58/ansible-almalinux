@@ -18,3 +18,6 @@ alias reload="source ~/.zshrc"
 alias vim=nvim
 alias vienv="vim ~/.env"
 alias brewup="brew update && brew upgrade"
+# SSH
+alias m1="ssh m1-nando.local"
+alias m4="ssh m4-nando.local"
